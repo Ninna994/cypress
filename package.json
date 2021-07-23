@@ -1,0 +1,23 @@
+{
+  "name": "cypress-tutorial",
+  "version": "1.0.0",
+  "description": "Cypress tutorial",
+  "main": "index.js",
+  "dependencies": {
+    "cypress": "^4.12.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ninna994/cypress.git"
+  },
+  "author": "Nikolina Đekić",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ninna994/cypress/issues"
+  },
+  "homepage": "https://github.com/Ninna994/cypress#readme"
+}
