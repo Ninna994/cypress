@@ -167,6 +167,20 @@ cy.url(); // Gets current URL as a string
 cy.url(options);
 ```
 
+1. _log_ - Print a message to the Cypress Command Log
+
+```js
+cy.log(message); // Gets current URL as a string
+cy.log(message, args, ...);
+```
+
+1. _then_ - Enables you to work with the subject yieded from the previous command. Controls what is the order of executing and displaying
+
+```js
+.then(callbackFn); // Gets current URL as a string
+.then(options, callbackFn);
+```
+
 ---
 
 ## Selectors
