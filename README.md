@@ -2,7 +2,7 @@
 
 <!-- TOC -->
 
-## Important commands for starting up
+## Important commands
 
 - _npm init_ - initialization of package.json file where we can put all the neccessary information
 
@@ -13,6 +13,36 @@
 ```js
 <reference types="Cypress" /> // Command that tells that we are writing Cypress code - put at the begining of the file
 ```
+
+- _run_ trigger _ALL_ tests from command line via _Headless Electron_
+
+  ```js
+  ./node_modules/.bin/cypress run
+  ```
+
+- _run --headed_ trigger _ALL_ tests from command line via _Headed Browser Electron_
+
+  ```js
+  ./node_modules/.bin/cypress run --headed
+  ```
+
+- _run --browser chrome_ trigger _ALL_ tests from command line via \_Headed Browser Chrome
+
+  ```js
+  ./node_modules/.bin/cypress run --browser chrome
+  ```
+
+- _run --spec RELATIVE-PATH_ trigger _ONE_ test from command line via _Headless Electron_
+
+  ```js
+  ./node_modules/.bin/cypress run --spec RELATIVE-PATH
+  ```
+
+- _run --spec RELATIVE-PATH-TO-FOLDER/\*_ trigger _ONE_ test from command line via _Headless Electron_
+
+  ```js
+  ./node_modules/.bin/cypress run --spec RELATIVE-PATH-TO-FOLDER/*
+  ```
 
 ## Key folders & Files
 
@@ -81,6 +111,16 @@ cy.click({force: true}) - if element is not visible on the page or has set 0x0 w
 .type(text, options)
 ```
 
+1. _eq_ - Get a DOM element at a specific index in an array of elements
+
+```js
+.eq(index)
+.eq(indexFromEnd)
+.eq(index, options)
+.eq(indexFromEnd, options)
+
+```
+
 1. _contains_ - Get the DOM element containing the text. DOM elemets can contain more than th e desired text and still match.
 
 ```js
@@ -95,6 +135,14 @@ cy.contains(content)
 cy.contains(content, options)
 cy.contains(selector, content)
 cy.contains(selector, content, options)
+
+```
+
+1. _find_ - Get the descendent DOM elements of a specific selector
+
+```js
+.find(selector)
+.find(selector, options)
 
 ```
 
@@ -182,9 +230,11 @@ Way of validating wheatger the application is bahaving and presented in a way wh
 - _expect_
 - _assert_
 - Chainable words:
+
   ```js
   to, be, been, is, that, which, and, has, have, with, at, of, same
   ```
+
 - _have.prop_, _have.attr_
 
 ---

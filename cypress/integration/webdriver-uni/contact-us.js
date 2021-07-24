@@ -2,7 +2,7 @@
 
 describe("Test Contact Us form via WebdriverUni", () => {
 
-    it.only("HAPPY PATH - Should be able to submit a successful submission via contact us form", () => {
+    it("HAPPY PATH - Should be able to submit a successful submission via contact us form", () => {
 
         //cypress code
         cy.visit("https://webdriveruniversity.com/Contact-Us/contactus.html")
@@ -23,7 +23,7 @@ describe("Test Contact Us form via WebdriverUni", () => {
         cy.get('[name="email"]').type("inanikolina@gmail.com")
         cy.get('[name="message"]').type("Ovo je poruka koju zelim da posaljem svima i da testiram o ceku se ovde radi")
 
-        cy.get('[type="reset"]').click()
+        // cy.get('[type="reset"]').click()
 
         // cy.get('[name="first_name"]').type("Milos")
         // cy.get('[name="last_name"]').type("Djekic")
