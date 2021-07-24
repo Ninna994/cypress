@@ -183,6 +183,10 @@ cy.log(message, args, ...);
 
 ---
 
+## Variables
+
+---
+
 ## Selectors
 
 - Select by name : [name = "name"]
