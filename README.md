@@ -82,3 +82,48 @@ cy.click({force: true}) - if element is not visible on the page or has set 0x0 w
 ## Selectors
 
 - Select by name : [name = "name"]
+- Select by type : [type = "type"]
+- XPATH selectors
+
+  - nodename - All nodes with the name "nodename"
+  - / - Selects from the root node
+  - // - Selects nodes in teh documents from the current node that match the selection no matter where they are
+  - . - Selects the current node
+  - .. - Selects the parent of the current node
+  - @ - Selects attributes
+  - \* wild card
+  - $ - look at the end of whatever we search for
+  - ^ - starts with
+
+  ```js
+  //By tag name
+  cy.get("input");
+
+  //By attribute name and value
+  cy.get("input[name='first_name']");
+
+  //By id
+  cy.get("#contact_me");
+
+  //By class
+  cy.get(".feedback-input");
+
+  //By multiple classes
+  cy.get("[class='navbar navbar-inverse navbar-fixed-top']");
+
+  //By two different attributes
+  cy.get("[name='email'][placeholder='Email Address']");
+
+  //By xpath
+  cy.xpath("//input[@name='first_name']");
+  ```
+
+## Plugins
+
+1. cypress XPath
+
+```js
+npm install -D cypress-xpath
+// Then include in projects cypress/support/index.js
+require('cypress-xpath)
+```

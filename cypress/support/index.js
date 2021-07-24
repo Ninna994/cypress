@@ -18,3 +18,15 @@ import './commands'
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+// Require xpath
+
+require('cypress-xpath')
+
+//  Disable the outputitng of XHR logs 
+
+Cypress.Server.defaults({
+    whitelist: (xhr) => {
+        return true
+    }
+})
