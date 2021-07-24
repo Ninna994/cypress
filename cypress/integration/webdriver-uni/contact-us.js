@@ -6,6 +6,13 @@ describe("Test Contact Us form via WebdriverUni", () => {
 
         //cypress code
         cy.visit("https://webdriveruniversity.com/Contact-Us/contactus.html")
+
+        // validate charset
+
+        cy.document().should('have.prop', 'charset').and('eq', 'UTF-8')
+        cy.title().should('include', 'WebDriver | Contact Us')
+        cy.url().should('include', 'contactus.html')
+
         // cy.get('#contact-us > .thumbnail').click()
         // cy.get('#contact-us').click({
         //     force: true
@@ -18,12 +25,14 @@ describe("Test Contact Us form via WebdriverUni", () => {
 
         cy.get('[type="reset"]').click()
 
-        cy.get('[name="first_name"]').type("Milos")
-        cy.get('[name="last_name"]').type("Djekic")
-        cy.get('[name="email"]').type("milos.djekic94@gmail.com")
-        cy.get('[name="message"]').type("Ovo je poruka koju zelim da posaljem svima i da testiram o ceku se ovde radi")
+        // cy.get('[name="first_name"]').type("Milos")
+        // cy.get('[name="last_name"]').type("Djekic")
+        // cy.get('[name="email"]').type("milos.djekic94@gmail.com")
+        // cy.get('[name="message"]').type("Ovo je poruka koju zelim da posaljem svima i da testiram o ceku se ovde radi")
 
         cy.get('[type="submit"]').click()
+
+        cy.get('h1').should('have.text', 'Thank You for your Message!')
 
     })
 
@@ -39,6 +48,8 @@ describe("Test Contact Us form via WebdriverUni", () => {
         cy.get('[name="message"]').type("Ovo je poruka koju zelim da posaljem svima i da testiram o ceku se ovde radi")
 
         cy.get('[type="submit"]').click()
+
+        cy.get('body').contains("Error")
 
     })
 })

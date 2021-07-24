@@ -1,5 +1,7 @@
 # Cypress tutorial
 
+<!-- TOC -->
+
 ## Important commands for starting up
 
 - _npm init_ - initialization of package.json file where we can put all the neccessary information
@@ -79,6 +81,46 @@ cy.click({force: true}) - if element is not visible on the page or has set 0x0 w
 .type(text, options)
 ```
 
+1. _contains_ - Get the DOM element containing the text. DOM elemets can contain more than th e desired text and still match.
+
+```js
+.contains(content)
+.contains(content, options)
+.contains(selector, content)
+.contains(selector, content, options)
+
+// ---or---
+
+cy.contains(content)
+cy.contains(content, options)
+cy.contains(selector, content)
+cy.contains(selector, content, options)
+
+```
+
+1. _document_ - Get the window.document of the page that is currently active
+
+```js
+cy.document();
+cy.document(options);
+```
+
+1. _title_ - Get the document title property of the page that is currently active
+
+```js
+cy.title();
+cy.title(options);
+```
+
+1. _url_ - Get the current URL of the page that is currently active
+
+```js
+cy.url(); // Gets current URL as a string
+cy.url(options);
+```
+
+---
+
 ## Selectors
 
 - Select by name : [name = "name"]
@@ -118,6 +160,8 @@ cy.click({force: true}) - if element is not visible on the page or has set 0x0 w
   cy.xpath("//input[@name='first_name']");
   ```
 
+---
+
 ## Plugins
 
 1. cypress XPath
@@ -127,3 +171,20 @@ npm install -D cypress-xpath
 // Then include in projects cypress/support/index.js
 require('cypress-xpath)
 ```
+
+---
+
+## Assertions - Chai library
+
+Way of validating wheatger the application is bahaving and presented in a way which we expect.
+
+- _should_
+- _expect_
+- _assert_
+- Chainable words:
+  ```js
+  to, be, been, is, that, which, and, has, have, with, at, of, same
+  ```
+- _have.prop_, _have.attr_
+
+---
