@@ -181,11 +181,36 @@ cy.log(message, args, ...);
 .then(options, callbackFn);
 ```
 
+1. _each_ - Iterate through an array like structure(arrays or objects with a length property)
+
+```js
+.each(callbackFn);
+
+cy.get("SELECTOR").each(($el, index, $list) => {
+
+})
+```
+
+1. _wrap_ - Yield the object passed into .wrap() . If the object is a promise, yield its resolved value
+
+```js
+cy.wrap(subject);
+cy.wrap(subject, options);
+```
+
+1. _invoke_ - Invoking JQuery and JS methods and funnctions
+
+```js
+cy.get(".modal").invoke("show");
+```
+
 ---
 
-## Variables
+## Aliases
 
----
+- Sharing context is the simplest way to use Aliases. To alias something you would like to share we use _as()_ command.
+- Aliases are available as \*this.\*\*
+- When we call aliases we use @ sign
 
 ## Selectors
 
