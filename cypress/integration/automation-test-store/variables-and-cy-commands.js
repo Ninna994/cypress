@@ -47,7 +47,6 @@ describe("Verifying variables, cypress commands and jquery commands", () => {
             expect(headerText).is.eq("Makeup")
         })
 
-
     })
 
     it.only("Validacte properties of the Contact Us Page", () => {
@@ -73,9 +72,6 @@ describe("Verifying variables, cypress commands and jquery commands", () => {
             })
 
         })
-
-
-
 
     })
 

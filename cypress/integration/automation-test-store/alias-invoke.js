@@ -11,8 +11,6 @@ describe("Alias and Invoke usage", () => {
         cy.get('@productHeaderText').its('length').should('be.gt', 5) // be.gt - be greater then
         cy.get('@productHeaderText').should('include', 'Seaweed Conditioner')
 
-
-
     })
 
     it.only("Validate the number of products on home page in featured section", () => {
@@ -22,12 +20,7 @@ describe("Alias and Invoke usage", () => {
         cy.get(".thumbnail").as('productThumbnail')
         cy.get('@productThumbnail').should('have.length', 16)
 
-
         cy.get('@productThumbnail').find('.productcart').invoke('attr', 'title').should('include', 'Add to Cart')
-
-
-
-
 
     })
 

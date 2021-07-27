@@ -2,7 +2,7 @@
 
 describe("Iterate over elements", () => {
 
-    it("Log information of each Hair Care of the products", () => {
+    it.only("Log information of each Hair Care of the products", () => {
 
         cy.visit('https://automationteststore.com')
         cy.get("a[href*= 'product/category&path=']").contains("Hair Care").click()
@@ -12,7 +12,7 @@ describe("Iterate over elements", () => {
         })
     })
 
-    it.only("Click on specific product and add it to basket", () => {
+    it("Click on specific product and add it to basket", () => {
 
         cy.visit('https://automationteststore.com')
         cy.get("a[href*= 'product/category&path=']").contains("Hair Care").click()
