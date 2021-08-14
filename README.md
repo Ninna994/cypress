@@ -281,3 +281,38 @@ Way of validating wheatger the application is bahaving and presented in a way wh
 - _have.prop_, _have.attr_
 
 ---
+
+## AssertionsMultiple tabs tricks
+
+```js
+// REMOVE target="_blank"
+
+cy.get("#contact-us").invoke("removeAttr", "target").click({
+  force: true,
+});
+
+//
+```
+
+## Same origin trick
+
+```js
+// set chromeWebSecurity to false in cypress.json
+{
+  "chromeWebSecurity": false
+}
+//
+```
+
+## Browser controls - Back, Forward, Reload
+
+```js
+//back
+cy.go("back");
+// forward
+cy.go("forward");
+// reload
+cy.reload();
+// hard reload
+cy.reload(true);
+```
