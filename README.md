@@ -236,6 +236,22 @@ cy.get(".modal").invoke("show");
 .uncheck(['US','EN'])
 ```
 
+1. _select_ - Select an <option> within a <select>. We can select via value or via option text
+
+```js
+.select()
+.select(value)
+.select(values)
+.select(options)
+.select(value, options)
+.select(values, options)
+```
+
+```js
+.select('US')
+.select(['US','EN'])
+```
+
 ---
 
 ## Aliases
