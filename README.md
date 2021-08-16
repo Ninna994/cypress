@@ -381,6 +381,20 @@ cy.reload(true);
 ```js
 //scroll into view
 cy.get("#actions").scrollIntoView();
+
+// drag and drop which1 - deprecated but means that it will click in center of element
+
+cy.get("#draggable").trigger("mousedown", {
+  which: 1,
+});
+
+cy.get("#droppable").trigger("mousemove").trigger("mouseup", {
+  force: true,
+});
+
+// doubleclick
+
+cy.get("#double-click").dblclick();
 ```
 
 ## Handling JS events / Alerts
