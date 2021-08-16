@@ -236,7 +236,7 @@ cy.get(".modal").invoke("show");
 .uncheck(['US','EN'])
 ```
 
-1. _select_ - Select an <option> within a <select>. We can select via value or via option text
+1. _select_ - Select an option within a select. We can select via value or via option text
 
 ```js
 .select()
@@ -250,6 +250,17 @@ cy.get(".modal").invoke("show");
 ```js
 .select('US')
 .select(['US','EN'])
+```
+
+1. _trigger_ - Trigger and event on a DOM element
+
+```js
+.trigger(eventName)
+.trigger(eventName, position)
+.trigger(eventName, options)
+.trigger(eventName, x, y)
+.trigger(eventName, position, options)
+.trigger(eventName, x, y, options)
 ```
 
 ---
@@ -363,6 +374,13 @@ cy.go("forward");
 cy.reload();
 // hard reload
 cy.reload(true);
+```
+
+## Mouse actions
+
+```js
+//scroll into view
+cy.get("#actions").scrollIntoView();
 ```
 
 ## Handling JS events / Alerts
