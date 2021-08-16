@@ -316,3 +316,23 @@ cy.reload();
 // hard reload
 cy.reload(true);
 ```
+
+## Handling JS events / Alerts
+
+When handling JS events we use .on function
+
+```js
+cy.on("window:alert", (str) => {
+  expect(str).to.equal("I am an alert box!");
+});
+```
+
+When handling alerts automatically we use _window:alert_ - We cannot chanfge behaviour of clicking ok
+
+When we need to Click Cancel or control alerts we use _window:confirm_
+
+- Handling JS Alerts with stubs
+
+```js
+// Replace a function, record its usage and control its behavior
+```
