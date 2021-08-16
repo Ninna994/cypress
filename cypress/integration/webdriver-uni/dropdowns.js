@@ -14,8 +14,4 @@ describe('Interact with dropdown lists', () => {
 
     })
 
-    it('', () => {
-
-    })
-
 })
