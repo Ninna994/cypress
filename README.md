@@ -335,4 +335,31 @@ When we need to Click Cancel or control alerts we use _window:confirm_
 
 ```js
 // Replace a function, record its usage and control its behavior
+const stub = cy.stub();
+cy.on("window:confirm", stub);
+
+cy.get("#button4")
+  .click()
+  .then(() => {
+    expect(stub.getCall(0)).to.be.calledWith("Press a button!");
+  })
+  .then(() => {
+    return true;
+  })
+  .then(() => {
+    cy.get("#confirm-alert-text").contains("You pressed OK!");
+  });
+```
+
+## Handling iframes
+
+If website uses iframe that is a cross-origin frame, Cypress will not be able to automate or communicate with this iframe.
+
+```js
+// How to make Cypress use iframe
+cy.get("#frame").then(($iframe) => {
+  const body = $iframe.contents().find("body");
+  cy.wrap(body).as("iframe");
+});
+// How to interact with iframe
 ```
