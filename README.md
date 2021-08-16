@@ -204,6 +204,38 @@ cy.wrap(subject, options);
 cy.get(".modal").invoke("show");
 ```
 
+1. _check_ - Check checkbox(es) or radios. This element must be an input width type checkbox or radio
+
+```js
+.check()
+.check(value)
+.check(values)
+.check(options)
+.check(value, options)
+.check(values, options)
+```
+
+```js
+.check('US')
+.check(['US','EN'])
+```
+
+1. _uncheck_ - Check checkbox(es) or radios. This element must be an input width type checkbox or radio
+
+```js
+.uncheck()
+.uncheck(value)
+.uncheck(values)
+.uncheck(options)
+.uncheck(value, options)
+.uncheck(values, options)
+```
+
+```js
+.uncheck('US')
+.uncheck(['US','EN'])
+```
+
 ---
 
 ## Aliases
