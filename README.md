@@ -44,17 +44,6 @@
   ./node_modules/.bin/cypress run --spec RELATIVE-PATH-TO-FOLDER/*
   ```
 
-- In order to work properly we need to install dependency
-
-```js
-npm install --save-dev cypress-file-upload
-
-// In support/commands.js insert
-
-import 'cypress-file-upload'
-
-```
-
 ## Key folders & Files
 
 - _node_modules_ -key dependencies
@@ -282,6 +271,24 @@ cy.get(".modal").invoke("show");
 .trigger(eventName, x, y, options)
 ```
 
+1. _fixtures_ - Load a fixed set of data located in a file
+
+```js
+cy.fixture(filePath);
+cy.fixture(filePath, encoding);
+cy.fixture(filePath, options);
+cy.fixture(filePath, encoding, options);
+
+// fixture initialization
+cy.fixture("example.json").then(function (data) {
+  // this.data = data
+  globalThis.data = data;
+});
+
+//  data is accessed by typing:
+data.NAME_FROM_JSON_FILE;
+```
+
 ---
 
 ## Aliases
@@ -339,6 +346,17 @@ cy.get(".modal").invoke("show");
 npm install -D cypress-xpath
 // Then include in projects cypress/support/index.js
 require('cypress-xpath)
+```
+
+1. cypress file upload - In order to work properly we need to install dependency
+
+```js
+npm install --save-dev cypress-file-upload
+
+// In support/commands.js insert
+
+import 'cypress-file-upload'
+
 ```
 
 ---

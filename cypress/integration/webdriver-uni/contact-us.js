@@ -1,7 +1,12 @@
 /// <reference types="Cypress" />
 
 describe("Test Contact Us form via WebdriverUni", () => {
-
+    before(() => {
+        cy.fixture('example.json').then(function (data) {
+            // this.data = data
+            globalThis.data = data
+        })
+    })
     it("HAPPY PATH - Should be able to submit a successful submission via contact us form", () => {
 
         //cypress code
@@ -85,6 +90,22 @@ describe("Test Contact Us form via WebdriverUni", () => {
         // cy.get('[name="last_name"]').type("Djekic")
         // cy.get('[name="email"]').type("milos.djekic94@gmail.com")
         // cy.get('[name="message"]').type("Ovo je poruka koju zelim da posaljem svima i da testiram o ceku se ovde radi")
+
+        cy.get('[type="submit"]').click()
+
+        cy.get('h1').should('have.text', 'Thank You for your Message!')
+
+    })
+
+    it.only("HAPPY PATH insert data from fixtures", () => {
+
+        //cypress code
+        cy.visit("https://webdriveruniversity.com/Contact-Us/contactus.html")
+
+        cy.get('[name="first_name"]').type(data.first_name)
+        cy.get('[name="last_name"]').type(data.last_name)
+        cy.get('[name="email"]').type(data.email)
+        cy.get('[name="message"]').type(data.body)
 
         cy.get('[type="submit"]').click()
 
