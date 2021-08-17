@@ -44,6 +44,17 @@
   ./node_modules/.bin/cypress run --spec RELATIVE-PATH-TO-FOLDER/*
   ```
 
+- In order to work properly we need to install dependency
+
+```js
+npm install --save-dev cypress-file-upload
+
+// In support/commands.js insert
+
+import 'cypress-file-upload'
+
+```
+
 ## Key folders & Files
 
 - _node_modules_ -key dependencies
@@ -513,4 +524,25 @@ cy.get("#frame").then(($iframe) => {
   cy.wrap(body).as("iframe");
 });
 // How to interact with iframe
+```
+
+## Datepicker
+
+## Handling File upload
+
+```js
+// Install dependences first, place image in fixtures folder
+
+cy.fixture("user.jpg", "base64").then((fileContent) => {
+  cy.get("#myFile").attachFile(
+    {
+      fileContent,
+      fileName: "user.jpg",
+      mimeType: "image/jpg",
+    },
+    {
+      uploadType: "input",
+    }
+  );
+});
 ```

@@ -6,6 +6,7 @@ describe('Handling datepickers', () => {
         cy.get('#datepicker').scrollIntoView().invoke('removeAttr', 'target').click({
             force: true
         })
+        cy.get('#datepicker').click()
     })
     it('Select date from datepicker', () => {
         let date = new Date()
@@ -19,7 +20,7 @@ describe('Handling datepickers', () => {
 
     it.only('Create future day, year, date', () => {
         var day = new Date()
-        day.setDate(day.getDate() + 50)
+        day.setDate(day.getDate() + 360)
 
         var futureYear = day.getFullYear()
         var futureMonth = day.toLocaleString("default", {
@@ -35,10 +36,25 @@ describe('Handling datepickers', () => {
         function selectMonthAndYear() {
             cy.get('.datepicker-dropdown').find('.datepicker-switch').first().then(currentDate => {
                 if (!currentDate.text().includes(futureYear)) {
-
+                    cy.get('.next').first().click();
+                    selectMonthAndYear();
                 }
+            }).then(() => {
+                cy.get('.datepicker-dropdown').find('.datepicker-switch').first().then(currentDate => {
+                    if (!currentDate.text().includes(futureMonth)) {
+                        cy.get('.next').first().click();
+                        selectMonthAndYear();
+                    }
+                })
             })
         }
+
+        function selectFutureDay() {
+            cy.get('[class="day"]').contains(futureDay).click();
+        }
+
+        selectMonthAndYear();
+        selectFutureDay();
     })
 
 
