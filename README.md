@@ -62,7 +62,7 @@ import 'cypress-file-upload'
 
 ---
 
-## Mocca
+## Mocca and Hooks
 
 - _describe()_ - functiion that gruoups test cases
 
@@ -80,7 +80,15 @@ it("Test case", callback_function() => {})
 
 - _it.only()_ - function that executes only selected test from the gruop of tests
 
----
+- _before()_ - runs once before all tests in the block
+
+- _after()_ - runs once after all tests in the block
+
+- _beforeEach()_ - runs before each test in the block
+
+- _afterEach()_ - uns after each test in the block
+
+  ***
 
 ## Cypress important functions [Link](https://docs.cypress.io/api/table-of-contents)
 
