@@ -143,7 +143,7 @@ describe("Test Contact Us form via WebdriverUni", () => {
 
     })
 
-    it.only("SAD PATH - Object model - Should not be able to submit a successfull submission via contact us form  as all fields are required", () => {
+    it("SAD PATH - Object model - Should not be able to submit a successfull submission via contact us form  as all fields are required", () => {
         cy.webdriverUni_ContactForm_Submission(Cypress.env('first_name'), data.last_name, "How can I learn anything?", 'body', "Error: Invalid email address")
 
 

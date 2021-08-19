@@ -8,6 +8,8 @@ class Contact_Us_PO {
         cy.get('[type="submit"]').click()
 
         cy.get($selector).contains(textToLocate)
+
+        cy.screenshot("Made a contact us form submission")
     }
 }
 export default Contact_Us_PO

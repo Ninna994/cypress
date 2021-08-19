@@ -6,6 +6,7 @@ describe("Test Contact Us form via Automation Test Store", () => {
         //     // this.data = data
         //     globalThis.data = data
         // })
+        cy.viewport(550, 750)
         cy.fixture('userDetails.json').as("user")
     })
     it("HAPPY PATH - Should be able to submit a successful submission via contact us form", () => {

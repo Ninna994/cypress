@@ -289,6 +289,40 @@ cy.fixture("example.json").then(function (data) {
 data.NAME_FROM_JSON_FILE;
 ```
 
+1. _pause_ - Stop cy commands from running and allow interaction with the application under test. You can then "resume" running all commands or choose to step through the "next" commands from the Command Log.
+
+```js
+.pause()
+.pause(options)
+
+cy.pause()
+cy.pause(options)
+
+```
+
+```js
+// usage:
+cy.pause().getCookie("app"); // Pause at the beginning of commands
+cy.get("nav").pause(); // Pause after the 'get' commands yield
+```
+
+1. _wait_ - Wait for a number of milliseconds or wait for an aliased resource to resolve before moving on to the next command.
+
+```js
+cy.wait(time);
+cy.wait(alias);
+cy.wait(aliases);
+cy.wait(time, options);
+cy.wait(alias, options);
+cy.wait(aliases, options);
+```
+
+```js
+// usage
+cy.wait(500);
+cy.wait("@getProfile");
+```
+
 ---
 
 ## Aliases
@@ -622,4 +656,53 @@ cy.fixture("user.jpg", "base64").then((fileContent) => {
     }
   );
 });
+```
+
+## Screenshots and Videos
+
+```js
+// Cypress comes with the ability to take screenshots, whether you are running via cypress open or cypress run, even in CI.
+cy.screenshot();
+
+// Videos
+// Cypress records a video for each spec file when running tests during cypress run. Videos are not automatically recorded during cypress open
+```
+
+## Configuring Viewports
+
+Control the size and orientation of the screen for your application. You can set the viewport's width and height globally by defining viewportWidth and viewportHeight in the configuration. [Presets link](https://docs.cypress.io/api/commands/viewport#Arguments)
+
+```js
+cy.viewport(width, height);
+cy.viewport(preset, orientation);
+cy.viewport(width, height, options);
+cy.viewport(preset, orientation, options);
+
+// USAGE:
+cy.viewport(550, 750); // Set viewport to 550px x 750px
+cy.viewport("iphone-6"); // Set viewport to 375px x 667px
+```
+
+## Clear Cookies and Clear Local Storage
+
+Clear all browser cookies for current domain and subdomain. Cypress automatically clears all cookies before each test to prevent state from being shared across tests. You shouldn't need to use this command unless you're using it to clear a specific cookie inside a single test.
+
+```js
+cy.clearCookies();
+cy.clearCookies(options);
+
+cy.clearCookies(); // clear all cookies
+```
+
+Clear data in localStorage for current domain and subdomain. Cypress automatically runs this command before each test to prevent state from being shared across tests. You shouldn't need to use this command unless you're using it to clear localStorage inside a single test.
+
+```js
+cy.clearLocalStorage();
+cy.clearLocalStorage(key);
+cy.clearLocalStorage(options);
+cy.clearLocalStorage(keys, options);
+
+// USAGE:
+
+cy.clearLocalStorage(); // clear all local storage
 ```
