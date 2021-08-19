@@ -47,7 +47,7 @@
 ## Key folders & Files
 
 - _node_modules_ -key dependencies
-- _cypress.json_ - change default values
+- _cypress.json_ - change default values - This is place where all the deafult settings are placed. Preview - Cypress main screen, third tab - Settings. [Link for documentation]("https://docs.cypress.io/guides/references/configuration#Timeouts")
 
 ---
 
@@ -378,7 +378,7 @@ Way of validating wheatger the application is bahaving and presented in a way wh
 
 ---
 
-## AssertionsMultiple tabs tricks
+## Multiple tabs tricks
 
 ```js
 // REMOVE target="_blank"
@@ -503,6 +503,47 @@ cy.get("#veggie").prevUntil("#fruits").should("have.length", "5");
 cy.get(".traversal-button-other-states .active")
   .siblings()
   .should("have.length", 3);
+```
+
+---
+
+## Environment Variables Options
+
+Any key/value you set in your configuration file (cypress.json by default) under the env key will become an environment variable.
+
+```json
+{
+  "projectId": "128076ed-9868-4e98-9cef-98dd8b705d75",
+  "env": {
+    "login_url": "/login",
+    "products_url": "/products"
+  }
+}
+```
+
+In test file:
+
+```js
+Cypress.env(); // {login_url: '/login', products_url: '/products'}
+Cypress.env("login_url"); // '/login'
+Cypress.env("products_url"); // '/products'
+```
+
+Alter env in runtime
+
+```json
+./node_modules/.bin/cypress run --browser electron --spec cypress/integration/webdriver-uni/contact-us.js --env first_name=Nina
+```
+
+## Global options
+
+```json
+// Simple URL
+"baseUrl": "LINK"
+```
+
+```js
+cy.visit("/"); //goes to Base URL
 ```
 
 ## Handling JS events / Alerts

@@ -54,4 +54,9 @@ Cypress.Commands.add('addProductToBasket', productName => {
     })
 })
 
+// Access webdriveruni homepage
+Cypress.Commands.add('navigateToWebdriverUniHomepage', () => {
+    cy.visit('/')
+})
+
 import 'cypress-file-upload'
