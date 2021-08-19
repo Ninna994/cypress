@@ -554,6 +554,16 @@ cy.get("#frame").then(($iframe) => {
 
 ## Datepicker
 
+## Custom Commands
+
+You define custom command in support/commands.js and call it as a function
+
+```js
+Cypress.Commands.add(name, callbackFn);
+Cypress.Commands.add(name, options, callbackFn);
+Cypress.Commands.overwrite(name, callbackFn);
+```
+
 ## Handling File upload
 
 ```js

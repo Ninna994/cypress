@@ -102,14 +102,12 @@ describe("Test Contact Us form via WebdriverUni", () => {
         //cypress code
         cy.visit("https://webdriveruniversity.com/Contact-Us/contactus.html")
 
-        cy.get('[name="first_name"]').type(data.first_name)
-        cy.get('[name="last_name"]').type(data.last_name)
-        cy.get('[name="email"]').type(data.email)
-        cy.get('[name="message"]').type(data.body)
+        // cy.get('[name="first_name"]').type(data.first_name)
+        // cy.get('[name="last_name"]').type(data.last_name)
+        // cy.get('[name="email"]').type(data.email)
+        // cy.get('[name="message"]').type(data.body)
+        cy.webdriverUni_ContactForm_Submission(data.first_name, data.last_name, data.email, "How can I learn anything?", 'h1', "Thank You for your Message")
 
-        cy.get('[type="submit"]').click()
-
-        cy.get('h1').should('have.text', 'Thank You for your Message!')
 
     })
 })
