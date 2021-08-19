@@ -45,4 +45,13 @@ Cypress.Commands.add('webdriverUni_ContactForm_Submission', (firstName, lastName
     cy.get($selector).contains(textToLocate)
 })
 
+Cypress.Commands.add('addProductToBasket', productName => {
+    cy.get(".fixed_wrapper .prdocutname").each(($el, index, $list) => {
+        if ($el.text() === productName) {
+            cy.log($el.text())
+            cy.get('.productcart').eq(index).click()
+        }
+    })
+})
+
 import 'cypress-file-upload'
