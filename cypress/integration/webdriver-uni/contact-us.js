@@ -1,3 +1,5 @@
+import Homepage_PO from '../../support/pageObjects/webdriver-uni/Homepage_PO'
+
 /// <reference types="Cypress" />
 
 describe("Test Contact Us form via WebdriverUni", () => {
@@ -9,8 +11,10 @@ describe("Test Contact Us form via WebdriverUni", () => {
     })
 
     beforeEach(() => {
-        cy.visit(Cypress.env('webdriverUni_Homepage') + '/Contact-Us/contactus.html')
-
+        // cy.visit(Cypress.env('webdriverUni_Homepage') + '/Contact-Us/contactus.html')
+        const homepage_PO = new Homepage_PO()
+        homepage_PO.visitHomepage()
+        homepage_PO.clickOn_ContactUs_Button()
 
     })
 
