@@ -52,6 +52,34 @@ npx cypress open // instead of ./node_modules/.bin/cypress open
 
 ```
 
+- _npx cypress open --env configFile=staging_ - Switch environments
+
+```js
+// Make config folder with env configuraton file
+// In plugins / index.js insert
+const fs = require("fs-extra");
+const path = require("path");
+
+function getConfigurationByFile(file) {
+  const pathToConfigFile = path.resolve("cypress", "config", `${file}.json`);
+
+  if (!fs.existsSync(pathToConfigFile)) {
+    console.log("No custom config file found.");
+    return {};
+  }
+
+  return fs.readJson(pathToConfigFile);
+}
+
+// plugins file
+module.exports = (on, config) => {
+  // accept a configFile value or use development by default
+  const file = config.env.configFile; //we will use no default value
+
+  return getConfigurationByFile(file);
+};
+```
+
 ## Key folders & Files
 
 - _node_modules_ -key dependencies
@@ -721,7 +749,7 @@ By making script we shorten the time we spend to type whole commands and whole p
 
 ```json
  "scripts": {
-    "triggerAllTests-headless": "npx cypress run",
+     "triggerAllTests-headless": "npx cypress run",
     "triggerAllTests-headed": "npx cypress run --headed",
     "triggerAllTests-chrome": "npx cypress run --browser chrome",
     "triggerAllTests-dashboard": "npx cypress run --record --key 2d371a28-26bf-4095-89a8-29db87b4860d ",
@@ -732,7 +760,8 @@ By making script we shorten the time we spend to type whole commands and whole p
     "delete-results": "rm -rf cypress/results/* || true",
     "mochawesome-merge": "npx mochawesome-merge cypress/results/mochawesome/*.json > mochawesome.json && npx marge mochawesome.json",
     "mochawesome-delete": "rm -rf mochawesome-report/* || true",
-    "cypress-regression-rack": "npm run detele-results && npm run mochawesome-delete && npm run triggerAllTests-headless && npm run mochawesome-merge"
+    "cypress-regression-rack": "npm run detele-results && npm run mochawesome-delete && npm run triggerAllTests-headless && npm run mochawesome-merge",
+    "triggerAllTests-staging": "npx cypress run --enc configFile=staging"
 
   }
 
@@ -778,12 +807,5 @@ By making script we shorten the time we spend to type whole commands and whole p
       }
     }
 }
-
-
-// Mocha awesome reports
-
-
-//
-
 
 ```
