@@ -725,10 +725,65 @@ By making script we shorten the time we spend to type whole commands and whole p
     "triggerAllTests-headed": "npx cypress run --headed",
     "triggerAllTests-chrome": "npx cypress run --browser chrome",
     "triggerAllTests-dashboard": "npx cypress run --record --key 2d371a28-26bf-4095-89a8-29db87b4860d ",
-    "triggerAllTests-webdriveruni":"npx cypress run --spec cypress/integration/webdriver-uni/*",
-    "triggerAllTests-automationteststore":"npx cypress run --spec cypress/integration/automation-test-store/*"
+    "triggerAllTests-webdriveruni": "npx cypress run --spec cypress/integration/webdriver-uni/*",
+    "triggerAllTests-automationteststore": "npx cypress run --spec cypress/integration/automation-test-store/*",
+    "junit-merge": "npx junit-merge -d cypress/results/junit -o cypress/results/junit/results.xml",
+    "junit-delete": "rm -rf cypress/results/junit/results.xml",
+    "delete-results": "rm -rf cypress/results/* || true",
+    "mochawesome-merge": "npx mochawesome-merge cypress/results/mochawesome/*.json > mochawesome.json && npx marge mochawesome.json",
+    "mochawesome-delete": "rm -rf mochawesome-report/* || true",
+    "cypress-regression-rack": "npm run detele-results && npm run mochawesome-delete && npm run triggerAllTests-headless && npm run mochawesome-merge"
 
   }
 
   //  We call it in terminal via npm run NAME_OF_SCRIPT
+```
+
+## Reporting
+
+- _npm install --save-dev cypress-multi-reporters mocha-junit-reporter_ - Install dependencies for reporting - Mocha JUnit Reports
+
+- _npx junit-merge -d cypress/results/junit -o cypress/results/junit/results.xml_ Merge JUnit reports into one
+
+- _npm install --save-dev mochawesome mochawesome-merge mochawesome-report-generator_ - Install Mochawesome and its dependencies
+
+- _npx mochawesome-merge cypress/results/mochawesome/\*.json > mochawesome.json && npx marge mochawesome.json_ Merge all mochawesome reports in one and generate HTML report in that one file
+
+```js
+// After that we need to add the separate reporter-config.json file to enable spec and junit and direct the junit reporter to save separate XML files
+
+// In config file - cypress.js we put
+{
+  "reporter": "cypress-multi-reporters",
+  "reporterOptions": {
+    "configFile": "reporter-config.json"
+  }
+}
+
+// We make new file in the root of project and put this (JUNIT + MOCHAWESOME)
+{
+    "reporterEnabled": "spec, cypress-multi-reporters",
+    "mochaJunitReporterReporterOptions": {
+      "mochaFile": "cypress/results/junit/results-[hash].xml"
+    },
+    "reporterOptions": {
+      "reporterEnabled": "mochawesome",
+      "mochawesomeReporterOptions": {
+        "reportDir": "cypress/results/mochawesome",
+        "quite": true,
+        "overwrite": false,
+        "html": false,
+        "json": true
+
+      }
+    }
+}
+
+
+// Mocha awesome reports
+
+
+//
+
+
 ```

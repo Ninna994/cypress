@@ -4,5 +4,9 @@
     "first_name": "Sarah",
     "webdriverUni_Homepage": "https://webdriveruniversity.com"
   },
-  "projectId": "d8zz1i"
+  "projectId": "d8zz1i",
+  "reporter": "cypress-multi-reporters",
+  "reporterOptions": {
+    "configFile": "reporter-config.json"
+  }
 }
