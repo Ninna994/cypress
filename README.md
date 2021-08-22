@@ -44,6 +44,14 @@
   ./node_modules/.bin/cypress run --spec RELATIVE-PATH-TO-FOLDER/*
   ```
 
+- _npm install -g npx_ - Executes comnmand either from a local node_modules/.bin or from central cache. Simplifies executing
+
+```js
+// When installed use
+npx cypress open // instead of ./node_modules/.bin/cypress open
+
+```
+
 ## Key folders & Files
 
 - _node_modules_ -key dependencies
@@ -705,4 +713,22 @@ cy.clearLocalStorage(keys, options);
 // USAGE:
 
 cy.clearLocalStorage(); // clear all local storage
+```
+
+## Making script in package.json
+
+By making script we shorten the time we spend to type whole commands and whole paths. We use it after we installed npx package.
+
+```json
+ "scripts": {
+    "triggerAllTests-headless": "npx cypress run",
+    "triggerAllTests-headed": "npx cypress run --headed",
+    "triggerAllTests-chrome": "npx cypress run --browser chrome",
+    "triggerAllTests-dashboard": "npx cypress run --record --key 2d371a28-26bf-4095-89a8-29db87b4860d ",
+    "triggerAllTests-webdriveruni":"npx cypress run --spec cypress/integration/webdriver-uni/*",
+    "triggerAllTests-automationteststore":"npx cypress run --spec cypress/integration/automation-test-store/*"
+
+  }
+
+  //  We call it in terminal via npm run NAME_OF_SCRIPT
 ```

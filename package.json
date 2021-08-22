@@ -11,7 +11,13 @@
     "cypress-xpath": "^1.6.2"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "triggerAllTests-headless": "npx cypress run",
+    "triggerAllTests-headed": "npx cypress run --headed",
+    "triggerAllTests-chrome": "npx cypress run --browser chrome",
+    "triggerAllTests-dashboard": "npx cypress run --record --key 2d371a28-26bf-4095-89a8-29db87b4860d ",
+    "triggerAllTests-webdriveruni":"npx cypress run --spec cypress/integration/webdriver-uni/*",
+    "triggerAllTests-automationteststore":"npx cypress run --spec cypress/integration/automation-test-store/*"
+   
   },
   "repository": {
     "type": "git",
