@@ -9,14 +9,14 @@ describe("Test Contact Us form via Automation Test Store", () => {
         cy.viewport(550, 750)
         cy.fixture('userDetails.json').as("user")
     })
-    it("HAPPY PATH - Should be able to submit a successful submission via contact us form", () => {
-
+    it.only("HAPPY PATH - Should be able to submit a successful submission via contact us form", () => {
+        Cypress.currentTest.retries(4)
         cy.visit("https://automationteststore.com/")
 
         // cy.get('.info_links_footer > :nth-child(5) > a').click()
         //  BY XPATH
         // cy.xpath('//a[contains(@href, "contact")]').click()
-        cy.get("a[href$= 'contact']").click().then(function (linkText) {
+        cy.get("a[href$= 'contact555']").click().then(function (linkText) {
             cy.log("This is a link text: " + linkText.text())
         })
 
@@ -40,7 +40,7 @@ describe("Test Contact Us form via Automation Test Store", () => {
 
     })
 
-    it.only("HAPPY PATH - from fixtures Should be able to submit a successful submission via contact us form", () => {
+    it("HAPPY PATH - from fixtures Should be able to submit a successful submission via contact us form", () => {
         cy.visit("https://automationteststore.com/")
         cy.get("a[href$= 'contact']").click().then(function (linkText) {
             cy.log("This is a link text: " + linkText.text())

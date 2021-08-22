@@ -1,0 +1,107 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2021-08-22T21:10:08.495Z",
+    "end": "2021-08-22T21:10:12.514Z",
+    "duration": 4019,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "ba1da097-e510-499a-b601-18ec50f77568",
+      "title": "",
+      "fullFile": "cypress\\integration\\automation-test-store\\variables-and-cy-commands.js",
+      "file": "cypress\\integration\\automation-test-store\\variables-and-cy-commands.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "3cb746b2-ffe3-4046-b005-568d4fd90b9a",
+          "title": "Verifying variables, cypress commands and jquery commands",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Validacte properties of the Contact Us Page",
+              "fullTitle": "Verifying variables, cypress commands and jquery commands Validacte properties of the Contact Us Page",
+              "timedOut": null,
+              "duration": 1622,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit('https://automationteststore.com/index.php?rt=content/contact'); //cypress code\n// Uses cypress commands and chaining - Is there a form and form header inside it\ncy.contains('#ContactUsFrm', 'Contact Us Form').find('#field_11').should('contain', 'First name'); //  JQuery approach\ncy.contains('#ContactUsFrm', 'Contact Us Form').then(function (text) {\n  var firstNameText = text.find('#field_11').text();\n  expect(firstNameText).to.contain('First name'); // Embeded commands (Closure)\n  cy.get('#field_11').then(function (fnText) {\n    cy.log(fnText.text());\n    cy.log(fnText);\n  });\n});",
+              "err": {},
+              "uuid": "0a03a7bf-1d9e-44e1-af1d-e873752d1a04",
+              "parentUUID": "3cb746b2-ffe3-4046-b005-568d4fd90b9a",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "0a03a7bf-1d9e-44e1-af1d-e873752d1a04"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 1622,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "6.2.2"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "cypress/results/mochawesome",
+        "quite": true,
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "5.2.0"
+    }
+  }
+}

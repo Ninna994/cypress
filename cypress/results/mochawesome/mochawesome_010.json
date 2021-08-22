@@ -1,0 +1,107 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2021-08-22T21:09:57.356Z",
+    "end": "2021-08-22T21:10:03.273Z",
+    "duration": 5917,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "2c7f7d39-0dc6-4572-9905-0e5348dd5ca9",
+      "title": "",
+      "fullFile": "cypress\\integration\\automation-test-store\\iterate-over-elements.js",
+      "file": "cypress\\integration\\automation-test-store\\iterate-over-elements.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "6c1f2cdd-f011-4c12-bcec-24f848f1204f",
+          "title": "Iterate over elements",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Click on specific product and add it to basket",
+              "fullTitle": "Iterate over elements Click on specific product and add it to basket",
+              "timedOut": null,
+              "duration": 3582,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.selectProduct('Seaweed Conditioner');",
+              "err": {},
+              "uuid": "c642cef3-ad27-4d2f-8e71-2ab8bb973b09",
+              "parentUUID": "6c1f2cdd-f011-4c12-bcec-24f848f1204f",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "c642cef3-ad27-4d2f-8e71-2ab8bb973b09"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 3582,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "6.2.2"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "cypress/results/mochawesome",
+        "quite": true,
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "5.2.0"
+    }
+  }
+}

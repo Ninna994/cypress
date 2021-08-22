@@ -1,6 +1,8 @@
 {
   "baseUrl": "https://webdriveruniversity.com",
   "env": {
+
+    "RETRIES": 2,
     "first_name": "Sarah",
     "webdriverUni_Homepage": "https://webdriveruniversity.com"
   },

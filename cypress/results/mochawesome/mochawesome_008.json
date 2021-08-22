@@ -1,0 +1,111 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2021-08-22T21:09:08.454Z",
+    "end": "2021-08-22T21:09:38.410Z",
+    "duration": 29956,
+    "testsRegistered": 1,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "6812b7f2-dc48-42ec-9721-9619887df4f4",
+      "title": "",
+      "fullFile": "cypress\\integration\\automation-test-store\\contact-us.js",
+      "file": "cypress\\integration\\automation-test-store\\contact-us.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "00833d34-0339-458a-8796-49babcd38a5b",
+          "title": "Test Contact Us form via Automation Test Store",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "HAPPY PATH - Should be able to submit a successful submission via contact us form",
+              "fullTitle": "Test Contact Us form via Automation Test Store HAPPY PATH - Should be able to submit a successful submission via contact us form",
+              "timedOut": null,
+              "duration": 5318,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "Cypress.currentTest.retries(4);\ncy.visit(\"https://automationteststore.com/\"); // cy.get('.info_links_footer > :nth-child(5) > a').click()\n//  BY XPATH\n// cy.xpath('//a[contains(@href, \"contact\")]').click()\ncy.get(\"a[href$= 'contact555']\").click().then(function (linkText) {\n  cy.log(\"This is a link text: \" + linkText.text());\n});\ncy.get('#ContactUsFrm_first_name').type(\"Nikolina\");\ncy.get('#ContactUsFrm_email').type(\"inanikolina@gmail.com\");\ncy.get('#ContactUsFrm_email').should('have.attr', 'name', 'email');\ncy.get('#ContactUsFrm_enquiry').type(\"Iskreno ne znam zasto opet radim jedno te isto\"); // cy.get('.col-md-6 > .btn').click()\n// BY CSSs Selector\ncy.get('button[title = \"Submit\"]').click(); // Assertions\ncy.get('.mb40 > :nth-child(3)').should('have.text', 'Your enquiry has been successfully sent to the store owner!');\ncy.log(\"Test has completed!\");\nconsole.log(\"Test has completed\");",
+              "err": {
+                "message": "AssertionError: Timed out retrying: Expected to find element: `a[href$= 'contact555']`, but never found it.",
+                "estack": "AssertionError: Timed out retrying: Expected to find element: `a[href$= 'contact555']`, but never found it.\n    at Context.eval (https://automationteststore.com/__cypress/tests?p=cypress\\integration\\automation-test-store\\contact-us.js:20:8)",
+                "diff": null
+              },
+              "uuid": "85d866fa-edbf-493c-9818-89fbba4cf933",
+              "parentUUID": "00833d34-0339-458a-8796-49babcd38a5b",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "85d866fa-edbf-493c-9818-89fbba4cf933"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 5318,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "6.2.2"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "cypress/results/mochawesome",
+        "quite": true,
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "5.2.0"
+    }
+  }
+}

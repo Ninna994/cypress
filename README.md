@@ -429,6 +429,25 @@ import 'cypress-file-upload'
 
 ```
 
+1. Cypress plugin retries - RETRIABILITY- Commes preinstalled in Cypress v5
+
+```js
+npm install -D cypress-plugin-retries
+
+// At the top og cypress/support/index.js
+require('cypress-plugin-retries')
+
+// In package.json in env
+"RETRIES": 2,
+
+// Directly in test
+Cypress.currentTest.retries(4)
+
+// VIA NPX
+
+CYPRESS_RETRIES=1 npm run NAMEOFSCRIPT
+```
+
 ---
 
 ## Assertions - Chai library
