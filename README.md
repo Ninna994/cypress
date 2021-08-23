@@ -828,3 +828,41 @@ By making script we shorten the time we spend to type whole commands and whole p
 }
 
 ```
+
+## JSON Server Configurations
+
+- Clone JSON Server
+- run _npm install_
+- run _npm install -g json-server_
+- run _npm run start_
+
+## API Testing
+
+1. _cy.request()_
+
+```js
+cy.request({
+  method: "DELETE / PUT / POST / GET",
+  url: "localhost:3000/posts/12",
+  body: {
+    // "title": "Do you want to learn automation testing",
+    title: "Updated title - Test",
+    author: "Nikolina Nina Ina Test Update PUT method",
+  },
+  headers: {
+    accept: "application/json", // ONLY FOR GET REQUEST
+  },
+}).then((response) => {
+  expect(response.status).to.equal(200);
+});
+```
+
+## XHR Testing
+
+XHR is an API in teh form of an object whose methods transfer data brtween a web browser an a web server. Cypress provides direct access to XHR objets, enabling us to create assertions based upon the properties of the XHR objects. We can alsu stub and mock the response of an XHR object
+
+1.
+
+```js
+
+```
