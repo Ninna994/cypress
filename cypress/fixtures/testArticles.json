@@ -1,0 +1,187 @@
+{
+    "articles": [
+        {
+            "title": "Grupo Primo",
+            "slug": "grupo-primo-ofmj12",
+            "body": "Follow @thiago.nigro on Instagram",
+            "createdAt": "2021-08-23T19:19:26.180Z",
+            "updatedAt": "2021-08-23T19:19:26.180Z",
+            "tagList": [],
+            "description": "Best investment and entrepreneur content",
+            "author": {
+                "username": "Grupo Primo",
+                "bio": null,
+                "image": "https://static.productionready.io/images/smiley-cyrus.jpg",
+                "following": false
+            },
+            "favorited": false,
+            "favoritesCount": 0
+        },
+        {
+            "title": "Request from API",
+            "slug": "request-from-api-xftfwd",
+            "body": "Spoko mordzia",
+            "createdAt": "2021-08-23T19:19:04.113Z",
+            "updatedAt": "2021-08-23T19:19:04.113Z",
+            "tagList": [],
+            "description": "Testy Lukasza",
+            "author": {
+                "username": "Lukasz1",
+                "bio": null,
+                "image": "https://static.productionready.io/images/smiley-cyrus.jpg",
+                "following": false
+            },
+            "favorited": false,
+            "favoritesCount": 0
+        },
+        {
+            "title": "Request from API",
+            "slug": "request-from-api-5aw9ml",
+            "body": "Spoko mordzia",
+            "createdAt": "2021-08-23T19:17:27.710Z",
+            "updatedAt": "2021-08-23T19:17:27.710Z",
+            "tagList": [],
+            "description": "Testy Lukasza",
+            "author": {
+                "username": "Lukasz1",
+                "bio": null,
+                "image": "https://static.productionready.io/images/smiley-cyrus.jpg",
+                "following": false
+            },
+            "favorited": false,
+            "favoritesCount": 0
+        },
+        {
+            "title": "Request from API",
+            "slug": "request-from-api-qmggz9",
+            "body": "Spoko mordzia",
+            "createdAt": "2021-08-23T19:14:16.279Z",
+            "updatedAt": "2021-08-23T19:14:16.279Z",
+            "tagList": [],
+            "description": "Testy Lukasza",
+            "author": {
+                "username": "Lukasz1",
+                "bio": null,
+                "image": "https://static.productionready.io/images/smiley-cyrus.jpg",
+                "following": false
+            },
+            "favorited": false,
+            "favoritesCount": 0
+        },
+        {
+            "title": "Request from API",
+            "slug": "request-from-api-6za7za",
+            "body": "Spoko mordzia",
+            "createdAt": "2021-08-23T19:13:39.962Z",
+            "updatedAt": "2021-08-23T19:13:39.962Z",
+            "tagList": [],
+            "description": "Testy Lukasza",
+            "author": {
+                "username": "Lukasz1",
+                "bio": null,
+                "image": "https://static.productionready.io/images/smiley-cyrus.jpg",
+                "following": false
+            },
+            "favorited": false,
+            "favoritesCount": 0
+        },
+        {
+            "title": "Request from API",
+            "slug": "request-from-api-9d6fwb",
+            "body": "Spoko mordzia",
+            "createdAt": "2021-08-23T19:13:04.155Z",
+            "updatedAt": "2021-08-23T19:13:04.155Z",
+            "tagList": [],
+            "description": "Testy Lukasza",
+            "author": {
+                "username": "Lukasz1",
+                "bio": null,
+                "image": "https://static.productionready.io/images/smiley-cyrus.jpg",
+                "following": false
+            },
+            "favorited": false,
+            "favoritesCount": 0
+        },
+        {
+            "title": "Request from API",
+            "slug": "request-from-api-ddjjv",
+            "body": "Spoko mordzia",
+            "createdAt": "2021-08-23T19:12:35.413Z",
+            "updatedAt": "2021-08-23T19:12:35.413Z",
+            "tagList": [],
+            "description": "Testy Lukasza",
+            "author": {
+                "username": "Lukasz1",
+                "bio": null,
+                "image": "https://static.productionready.io/images/smiley-cyrus.jpg",
+                "following": false
+            },
+            "favorited": false,
+            "favoritesCount": 0
+        },
+        {
+            "title": "Article created by Cypress test",
+            "slug": "article-created-by-cypress-test-7z64eq",
+            "body": "This article is created with Cypress. See code here: https://github.com/helenanull/cypress-example",
+            "createdAt": "2021-08-23T19:06:19.143Z",
+            "updatedAt": "2021-08-23T19:06:19.143Z",
+            "tagList": [
+                "test-automation",
+                "simple",
+                "cypress"
+            ],
+            "description": "https://github.com/helenanull/cypress-example",
+            "author": {
+                "username": "cy446783311",
+                "bio": null,
+                "image": "https://static.productionready.io/images/smiley-cyrus.jpg",
+                "following": false
+            },
+            "favorited": false,
+            "favoritesCount": 0
+        },
+        {
+            "title": "Article created by Cypress test",
+            "slug": "article-created-by-cypress-test-5tz9m6",
+            "body": "This article is created with Cypress. See code here: https://github.com/helenanull/cypress-example",
+            "createdAt": "2021-08-23T19:06:03.738Z",
+            "updatedAt": "2021-08-23T19:06:03.738Z",
+            "tagList": [
+                "test-automation",
+                "simple",
+                "cypress"
+            ],
+            "description": "https://github.com/helenanull/cypress-example",
+            "author": {
+                "username": "cy864050414",
+                "bio": null,
+                "image": "https://static.productionready.io/images/smiley-cyrus.jpg",
+                "following": false
+            },
+            "favorited": false,
+            "favoritesCount": 1
+        },
+        {
+            "title": "Article created by Cypress test",
+            "slug": "article-created-by-cypress-test-kn45at",
+            "body": "This article is created with Cypress. See code here: https://github.com/helenanull/cypress-example",
+            "createdAt": "2021-08-23T19:06:02.280Z",
+            "updatedAt": "2021-08-23T19:06:02.280Z",
+            "tagList": [
+                "test-automation",
+                "simple",
+                "cypress"
+            ],
+            "description": "https://github.com/helenanull/cypress-example",
+            "author": {
+                "username": "cy335070753",
+                "bio": null,
+                "image": "https://static.productionready.io/images/smiley-cyrus.jpg",
+                "following": false
+            },
+            "favorited": false,
+            "favoritesCount": 0
+        }
+    ],
+    "articlesCount": 500
+}
