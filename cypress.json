@@ -1,5 +1,9 @@
 {
   "baseUrl": "https://webdriveruniversity.com",
+  "retries": {
+    "runMode": 1,
+    "openMode": 2
+  },
   "env": {
     "first_name": "Sarah",
     "webdriverUni_Homepage": "https://webdriveruniversity.com"

@@ -20,13 +20,10 @@ import './commands'
 // require('./commands')
 
 // Require xpath
-require('cypress-plugin-retries')
 require('cypress-xpath')
 
 //  Disable the outputitng of XHR logs 
 
 Cypress.Server.defaults({
-    whitelist: (xhr) => {
-        return true
-    }
+    ignore: xhr => true
 })

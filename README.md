@@ -429,24 +429,42 @@ import 'cypress-file-upload'
 
 ```
 
-1. Cypress plugin retries - RETRIABILITY- Commes preinstalled in Cypress v5
+1. Cypress RETRIABILITY- Commes preinstalled in Cypress v5
 
 ```js
-npm install -D cypress-plugin-retries
-
-// At the top og cypress/support/index.js
-require('cypress-plugin-retries')
-
-// In package.json in env
-"RETRIES": 2,
-
+// npm install -D cypress-plugin-retries DEPRECATED
+// At the top og cypress/support/index.js DEPRECATED
+// require('cypress-plugin-retries') DEPRECATED
+// In cypress.json in env
+// "RETRIES": 2, - DEPRECATED
 // Directly in test
-Cypress.currentTest.retries(4)
+// Cypress.currentTest.retries(4) - DEPRECATED
+
+
+// in cypress.json
+"retries": {
+      "runMode": 1,
+      "openMode": 2
+    }
+// in test definition : TO override default settings in cypress.json
+
+it("Description", {
+retries:{
+  runMode: 2,
+  openMode: 2
+}
+}, () => {
+
+})
 
 // VIA NPX
 
 CYPRESS_RETRIES=1 npm run NAMEOFSCRIPT
 ```
+
+- _runMode_ - Allows zou to deine the number of test retries when running cypress run
+
+- _openMode_ - Allows zou to deine the number of test retries when running cypress open
 
 ---
 
@@ -861,8 +879,45 @@ cy.request({
 
 XHR is an API in teh form of an object whose methods transfer data brtween a web browser an a web server. Cypress provides direct access to XHR objets, enabling us to create assertions based upon the properties of the XHR objects. We can alsu stub and mock the response of an XHR object
 
-1.
+1. Disable XHR displaying / support/index.js - from version 5.0.
 
 ```js
+Cypress.Server.defaults({
+  ignore: (xhr) => true,
+});
 
+// OLD CODE for v4.12.1. DEPRECATED
+Cypress.Server.defaults({
+  whitelist: (xhr) => {
+    return true;
+  },
+});
+```
+
+## Different configurations
+
+```json
+{
+  "baseUrl": "http://www.webdriveruniversity.com/",
+  "chromeWebSecurity": false,
+  "defaultCommandTimeout": 10000,
+  "pageLoadTimeout": 30000,
+  "viewportHeight": 1080,
+  "viewportWidth": 1920,
+  "ignoreTestFiles": "same*.js",
+  "screenshotsFolder": "cypress/screenshots",
+  "retries": {
+    "runMode": 0,
+    "openMode": 0
+  },
+  "env": {
+    "webdriveruni_homepage": "http://www.webdriveruniversity.com/",
+    "first_name": "sarah"
+  },
+  "projectId": "5rkxf9",
+  "reporter": "cypress-multi-reporters",
+  "reporterOptions": {
+    "configFile": "reporter-config.json"
+  }
+}
 ```
