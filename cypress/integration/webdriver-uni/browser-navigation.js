@@ -2,7 +2,7 @@
 
 describe('Validate webdriveruni homepage links', () => {
 
-    it.only('Confirm that links redirect to the correct pages', () => {
+    it('Confirm that links redirect to the correct pages', () => {
         cy.visit('https://webdriveruniversity.com')
         cy.get('#contact-us').invoke('removeAttr', 'target').click({
             force: true
@@ -18,16 +18,12 @@ describe('Validate webdriveruni homepage links', () => {
 
 
         cy.go('back')
-        cy.get('#button-clicks').invoke('removeAttr', 'target').click({
-            force: true
-        })
-        cy.url().should('include', 'Click-Buttons')
+        // cy.get('#button-clicks').invoke('removeAttr', 'target').click({
+        //     force: true
+        // })
+        // cy.url().should('includ e', 'Click-Buttons')
 
-        cy.go('back')
-
-    })
-
-    it('', () => {
+        // cy.go('back')
 
     })
 

@@ -1,6 +1,10 @@
 {
   "baseUrl": "https://webdriveruniversity.com",
   "experimentalStudio": true,
+  "ignoreTestFiles": [
+    "**/other/*.js",
+    "**/api-testing/*.js"
+  ],
   "retries": {
     "runMode": 1,
     "openMode": 1
