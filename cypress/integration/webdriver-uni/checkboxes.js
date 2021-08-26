@@ -31,4 +31,14 @@ describe('Verify checkboxes via webdriveruni', () => {
 
     })
 
+    /* === Test Created with Cypress Studio === */
+    it('Click on all radio buttons', function() {
+        /* ==== Generated with Cypress Studio ==== */
+        cy.get('[value="green"]').check();
+        cy.get('[value="blue"]').check();
+        cy.get('[value="yellow"]').check();
+        cy.get('#radio-buttons > [value="orange"]').check();
+        cy.get('[value="purple"]').check();
+        /* ==== End Cypress Studio ==== */
+    });
 })

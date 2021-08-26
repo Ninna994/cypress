@@ -15,7 +15,8 @@ describe('Verify autocomplete dropdown lists via webdriveruniversity', () => {
             const productToSelect = 'Avacado'
 
             if (prod === productToSelect) {
-                $el.click()
+                // $el.click() DEPRECATED
+                $el.trigger("click")
                 cy.get('#submit-button').click()
                 cy.url().should('include', 'Avacado')
             }

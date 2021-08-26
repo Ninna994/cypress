@@ -1,8 +1,9 @@
 {
   "baseUrl": "https://webdriveruniversity.com",
+  "experimentalStudio": true,
   "retries": {
     "runMode": 1,
-    "openMode": 2
+    "openMode": 1
   },
   "env": {
     "first_name": "Sarah",

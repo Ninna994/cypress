@@ -89,6 +89,8 @@ module.exports = (on, config) => {
 
 ## Mocca and Hooks
 
+Mocca is used to give structure to our automated tests
+
 - _describe()_ - functiion that gruoups test cases
 
 ```js
@@ -113,7 +115,7 @@ it("Test case", callback_function() => {})
 
 - _afterEach()_ - uns after each test in the block
 
-  ***
+---
 
 ## Cypress important functions [Link](https://docs.cypress.io/api/table-of-contents)
 
@@ -359,6 +361,26 @@ cy.wait(500);
 cy.wait("@getProfile");
 ```
 
+1. _intercept_ -Spy and stub network requests and responses.
+
+```js
+cy.intercept(url);
+cy.intercept(method, url);
+cy.intercept(routeMatcher);
+
+// spying and response stubbing
+cy.intercept(url, staticResponse);
+cy.intercept(method, url, staticResponse);
+cy.intercept(routeMatcher, staticResponse);
+cy.intercept(url, routeMatcher, staticResponse);
+
+// spying, dynamic stubbing, request modification, etc.
+cy.intercept(url, routeHandler);
+cy.intercept(method, url, routeHandler);
+cy.intercept(routeMatcher, routeHandler);
+cy.intercept(url, routeMatcher, routeHandler);
+```
+
 ---
 
 ## Aliases
@@ -465,6 +487,26 @@ CYPRESS_RETRIES=1 npm run NAMEOFSCRIPT
 - _runMode_ - Allows zou to deine the number of test retries when running cypress run
 
 - _openMode_ - Allows zou to deine the number of test retries when running cypress open
+
+1. Cucumber preprocessor - Run cucumber/gherkin szntax with Cypress.io
+
+```js
+npm install --save-dev cypress-cucumber-preprocessor
+
+//  in cypress/plugins/index.js
+
+const cucumber = require('cypress-cucumber-preprocessor').default
+
+module.exports = (on, config) => {
+  on('file:preprocessor', cucumber())
+}
+
+// in package.json
+ "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true
+  },
+
+```
 
 ---
 
@@ -920,4 +962,30 @@ Cypress.Server.defaults({
     "configFile": "reporter-config.json"
   }
 }
+```
+
+## Cucumber BBD - Behaviour driven Development
+
+- Can be used for auomation test
+- CAn be used for manual tests
+- Gherkin Syntax - uses a set of special keywords to give structure and meaning to executable specifications
+
+```txt
+Feature: Login Page
+
+Scenario: Login using valid credentials
+  Given I access the Login Page
+  When I enter username nina
+  And I enter password 12345678
+  And I click on Login button
+  Then I should be presented with message success
+```
+
+## Gherkin Syntax
+
+```txt
+GIVEN -
+WHEN
+AND
+THEN
 ```
