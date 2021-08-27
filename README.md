@@ -2,17 +2,57 @@
 
 <!-- TOC -->
 
-## Important commands
+# Table of contents
 
-- _npm init_ - initialization of package.json file where we can put all the neccessary information
+- [Cypress tutorial](#cypress-tutorial)
+- [Table of contents](#table-of-contents)
+- [Setup](#setup)
+  - [Installation commands](#installation-commands)
+  - [Key folders & Files](#key-folders--files)
+  - [Mocca and Hooks](#mocca-and-hooks)
+  - [Assertions - Chai library](#assertions---chai-library)
+- [Functions](#functions)
+  - [Cypress important functions](#cypress-important-functions-linkhttpsdocscypressioapitable-of-contents)
+  - [Aliases](#aliases)
+  - [Selectors](#selectors)
+  - [Plugins](#plugins)
+  - [Mouse actions](#mouse-actions)
+  - [Traversal in JS and Cypress](#traversal-in-js-and-cypress)
+- [Tips and Tricks](#tips-and-tricks)
+  - [Multiple tabs tricks](#multiple-tabs-tricks)
+  - [Same origin trick](#same-origin-trick)
+  - [Browser controls - Back, Forward, Reload](#browser-controls---back-forward-reload)
+  - [Handling JS events / Alerts](#handling-js-events--alerts)
+  - [Handling iframes](#handling-iframes)
+  - [Environment Variables Options](#environment-variables-options)
+  - [Global options](#global-options)
+  - [Custom Commands](#custom-commands)
+  - [Handling File upload](#handling-file-upload)
+  - [Screenshots and Videos](#screenshots-and-videos)
+  - [Configuring Viewports](#configuring-viewports)
+  - [Clear Cookies and Clear Local Storage](#clear-cookies-and-clear-local-storage)
+- [Scripts and configurations](#scripts-and-configurations)
+  - [Making script in package.json](#making-script-in-packagejson)
+  - [Different configurations](#different-configurations)
+- [Reporting](#reporting)
+- [JSON / API / XHR](#json--api--xhr)
+  - [JSON Server Configurations](#json-server-configurations)
+  - [API Testing](#api-testing)
+  - [XHR Testing](#xhr-testing)
 
-- _npm install_ - installs all the important files
+# Setup
 
-- _./node_modules/.bin/cypress open_ - opens Cypress test runner
+## Installation commands
 
-```js
-<reference types="Cypress" /> // Command that tells that we are writing Cypress code - put at the begining of the file
-```
+- Starting Cypress
+
+  ```js
+  npm init - initialization of package.json file where we can put all the neccessary information
+
+  npm install - installs all the important files
+
+  ./node_modules/.bin/cypress open - opens Cypress test runner
+  ```
 
 - _run_ trigger _ALL_ tests from command line via _Headless Electron_
 
@@ -46,11 +86,11 @@
 
 - _npm install -g npx_ - Executes comnmand either from a local node_modules/.bin or from central cache. Simplifies executing
 
-```js
-// When installed use
-npx cypress open // instead of ./node_modules/.bin/cypress open
+  ```js
+  // When installed use
+  npx cypress open // instead of ./node_modules/.bin/cypress open
 
-```
+  ```
 
 - _npx cypress open --env configFile=staging_ - Switch environments
 
@@ -82,7 +122,6 @@ module.exports = (on, config) => {
 
 ## Key folders & Files
 
-- _node_modules_ -key dependencies
 - _cypress.json_ - change default values - This is place where all the deafult settings are placed. Preview - Cypress main screen, third tab - Settings. [Link for documentation]("https://docs.cypress.io/guides/references/configuration#Timeouts")
 
 ---
@@ -113,9 +152,28 @@ it("Test case", callback_function() => {})
 
 - _beforeEach()_ - runs before each test in the block
 
-- _afterEach()_ - uns after each test in the block
+- _afterEach()_ - runs after each test in the block
 
 ---
+
+## Assertions - Chai library
+
+Way of validating wheatger the application is bahaving and presented in a way which we expect.
+
+- _should_
+- _expect_
+- _assert_
+- Chainable words:
+
+  ```jsg
+  to, be, been, is, that, which, and, has, have, with, at, of, same
+  ```
+
+- _have.prop_, _have.attr_
+
+---
+
+# Functions
 
 ## Cypress important functions [Link](https://docs.cypress.io/api/table-of-contents)
 
@@ -132,6 +190,27 @@ cy.get(selector);
 cy.get(alias);
 cy.get(selector, options);
 cy.get(alias, options);
+```
+
+1. _contains_ - Get the DOM element containing the text. DOM elemets can contain more than the desired text and still match.
+
+```js
+.contains(content)
+.contains(content, options)
+.contains(selector, content)
+.contains(selector, content, options)
+
+// ---or---
+
+cy.contains(content)
+cy.contains(content, options)
+cy.contains(selector, content)
+cy.contains(selector, content, options)
+
+{ matchCase: false }
+regex
+
+
 ```
 
 1. _click_ - Click a DOM element
@@ -164,23 +243,6 @@ cy.click({force: true}) - if element is not visible on the page or has set 0x0 w
 .eq(indexFromEnd)
 .eq(index, options)
 .eq(indexFromEnd, options)
-
-```
-
-1. _contains_ - Get the DOM element containing the text. DOM elemets can contain more than th e desired text and still match.
-
-```js
-.contains(content)
-.contains(content, options)
-.contains(selector, content)
-.contains(selector, content, options)
-
-// ---or---
-
-cy.contains(content)
-cy.contains(content, options)
-cy.contains(selector, content)
-cy.contains(selector, content, options)
 
 ```
 
@@ -510,58 +572,6 @@ module.exports = (on, config) => {
 
 ---
 
-## Assertions - Chai library
-
-Way of validating wheatger the application is bahaving and presented in a way which we expect.
-
-- _should_
-- _expect_
-- _assert_
-- Chainable words:
-
-  ```js
-  to, be, been, is, that, which, and, has, have, with, at, of, same
-  ```
-
-- _have.prop_, _have.attr_
-
----
-
-## Multiple tabs tricks
-
-```js
-// REMOVE target="_blank"
-
-cy.get("#contact-us").invoke("removeAttr", "target").click({
-  force: true,
-});
-
-//
-```
-
-## Same origin trick
-
-```js
-// set chromeWebSecurity to false in cypress.json
-{
-  "chromeWebSecurity": false
-}
-//
-```
-
-## Browser controls - Back, Forward, Reload
-
-```js
-//back
-cy.go("back");
-// forward
-cy.go("forward");
-// reload
-cy.reload();
-// hard reload
-cy.reload(true);
-```
-
 ## Mouse actions
 
 ```js
@@ -656,44 +666,44 @@ cy.get(".traversal-button-other-states .active")
 
 ---
 
-## Environment Variables Options
+# Tips and Tricks
 
-Any key/value you set in your configuration file (cypress.json by default) under the env key will become an environment variable.
+## Multiple tabs tricks
 
-```json
+```js
+// REMOVE target="_blank"
+
+cy.get("#contact-us").invoke("removeAttr", "target").click({
+  force: true,
+});
+
+//
+```
+
+## Same origin trick
+
+```js
+// set chromeWebSecurity to false in cypress.json
 {
-  "projectId": "128076ed-9868-4e98-9cef-98dd8b705d75",
-  "env": {
-    "login_url": "/login",
-    "products_url": "/products"
-  }
+  "chromeWebSecurity": false
 }
+//
 ```
 
-In test file:
+## Browser controls - Back, Forward, Reload
 
 ```js
-Cypress.env(); // {login_url: '/login', products_url: '/products'}
-Cypress.env("login_url"); // '/login'
-Cypress.env("products_url"); // '/products'
+//back
+cy.go("back");
+// forward
+cy.go("forward");
+// reload
+cy.reload();
+// hard reload
+cy.reload(true);
 ```
 
-Alter env in runtime
-
-```json
-./node_modules/.bin/cypress run --browser electron --spec cypress/integration/webdriver-uni/contact-us.js --env first_name=Nina
-```
-
-## Global options
-
-```json
-// Simple URL
-"baseUrl": "LINK"
-```
-
-```js
-cy.visit("/"); //goes to Base URL
-```
+---
 
 ## Handling JS events / Alerts
 
@@ -742,7 +752,46 @@ cy.get("#frame").then(($iframe) => {
 // How to interact with iframe
 ```
 
-## Datepicker
+---
+
+## Environment Variables Options
+
+Any key/value you set in your configuration file (cypress.json by default) under the env key will become an environment variable.
+
+```json
+{
+  "projectId": "128076ed-9868-4e98-9cef-98dd8b705d75",
+  "env": {
+    "login_url": "/login",
+    "products_url": "/products"
+  }
+}
+```
+
+In test file:
+
+```js
+Cypress.env(); // {login_url: '/login', products_url: '/products'}
+Cypress.env("login_url"); // '/login'
+Cypress.env("products_url"); // '/products'
+```
+
+Alter env in runtime
+
+```json
+./node_modules/.bin/cypress run --browser electron --spec cypress/integration/webdriver-uni/contact-us.js --env first_name=Nina
+```
+
+## Global options
+
+```json
+// Simple URL
+"baseUrl": "LINK"
+```
+
+```js
+cy.visit("/"); //goes to Base URL
+```
 
 ## Custom Commands
 
@@ -822,6 +871,8 @@ cy.clearLocalStorage(keys, options);
 cy.clearLocalStorage(); // clear all local storage
 ```
 
+# Scripts and configurations
+
 ## Making script in package.json
 
 By making script we shorten the time we spend to type whole commands and whole paths. We use it after we installed npx package.
@@ -847,7 +898,35 @@ By making script we shorten the time we spend to type whole commands and whole p
   //  We call it in terminal via npm run NAME_OF_SCRIPT
 ```
 
-## Reporting
+## Different configurations
+
+```json
+{
+  "baseUrl": "http://www.webdriveruniversity.com/",
+  "chromeWebSecurity": false,
+  "defaultCommandTimeout": 10000,
+  "pageLoadTimeout": 30000,
+  "viewportHeight": 1080,
+  "viewportWidth": 1920,
+  "ignoreTestFiles": "same*.js",
+  "screenshotsFolder": "cypress/screenshots",
+  "retries": {
+    "runMode": 0,
+    "openMode": 0
+  },
+  "env": {
+    "webdriveruni_homepage": "http://www.webdriveruniversity.com/",
+    "first_name": "sarah"
+  },
+  "projectId": "5rkxf9",
+  "reporter": "cypress-multi-reporters",
+  "reporterOptions": {
+    "configFile": "reporter-config.json"
+  }
+}
+```
+
+# Reporting
 
 - _npm install --save-dev cypress-multi-reporters mocha-junit-reporter_ - Install dependencies for reporting - Mocha JUnit Reports
 
@@ -888,6 +967,8 @@ By making script we shorten the time we spend to type whole commands and whole p
 }
 
 ```
+
+# JSON / API / XHR
 
 ## JSON Server Configurations
 
@@ -934,58 +1015,4 @@ Cypress.Server.defaults({
     return true;
   },
 });
-```
-
-## Different configurations
-
-```json
-{
-  "baseUrl": "http://www.webdriveruniversity.com/",
-  "chromeWebSecurity": false,
-  "defaultCommandTimeout": 10000,
-  "pageLoadTimeout": 30000,
-  "viewportHeight": 1080,
-  "viewportWidth": 1920,
-  "ignoreTestFiles": "same*.js",
-  "screenshotsFolder": "cypress/screenshots",
-  "retries": {
-    "runMode": 0,
-    "openMode": 0
-  },
-  "env": {
-    "webdriveruni_homepage": "http://www.webdriveruniversity.com/",
-    "first_name": "sarah"
-  },
-  "projectId": "5rkxf9",
-  "reporter": "cypress-multi-reporters",
-  "reporterOptions": {
-    "configFile": "reporter-config.json"
-  }
-}
-```
-
-## Cucumber BBD - Behaviour driven Development
-
-- Can be used for auomation test
-- CAn be used for manual tests
-- Gherkin Syntax - uses a set of special keywords to give structure and meaning to executable specifications
-
-```txt
-Feature: Login Page
-
-Scenario: Login using valid credentials
-  Given I access the Login Page
-  When I enter username nina
-  And I enter password 12345678
-  And I click on Login button
-  Then I should be presented with message success
-```
-
-## Gherkin Syntax
-
-```txt
-GIVEN -
-WHEN
-AND
-THEN
 ```
