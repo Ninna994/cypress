@@ -1,5 +1,3 @@
-# Cypress tutorial
-
 <!-- TOC -->
 
 # Table of contents
@@ -120,13 +118,20 @@ module.exports = (on, config) => {
 };
 ```
 
+- _JSON server configuration_
+
+  - Clone JSON Server
+  - run _npm install_
+  - run _npm install -g json-server_
+  - run _npm run start_
+
 ## Key folders & Files
 
 - _cypress.json_ - change default values - This is place where all the deafult settings are placed. Preview - Cypress main screen, third tab - Settings. [Link for documentation]("https://docs.cypress.io/guides/references/configuration#Timeouts")
 
 ---
 
-## Mocca and Hooks
+# Mocca and Hooks
 
 Mocca is used to give structure to our automated tests
 
@@ -156,9 +161,9 @@ it("Test case", callback_function() => {})
 
 ---
 
-## Assertions - Chai library
+# Assertions
 
-Way of validating wheatger the application is bahaving and presented in a way which we expect.
+CHAI - Way of validating wheatger the application is bahaving and presented in a way which we expect.
 
 - _should_
 - _expect_
@@ -171,28 +176,113 @@ Way of validating wheatger the application is bahaving and presented in a way wh
 
 - _have.prop_, _have.attr_
 
----
+## should()
+
+- To make an assertion about the current subject, use the .should() command.
+
+- Full [list](https://docs.cypress.io/guides/references/assertions#TDD-Assertions)
+
+```js
+// Common assertions
+.should('have.class', 'success')
+.should('have.text', 'Column content')
+.should('contain', 'Column content')
+.should('have.html', 'Column content')
+.should('match', 'td')
+.should('match', /column content/i)
+.should('be.visible')
+.should('be.disabled')
+.should('have.value', '630.00')
+.should('have.attr', 'placeholder', 'Email')
+.should('be.gt') //be greater than
+
+
+```
+
+- To assert input elements use have.value
+- To assert non-input elements use contain assertion
+
+## and()
+
+- To chain multiple assertions together, use the .and() command.
+
+```js
+// Chaining
+.should('have.length', 3).and('be.visible')
+.should('exist')
+  .and('have.length', 3)
+  // but should not be visible to the user
+  .and('not.be.visible')
+```
+
+## expect()
+
+- To make a BDD assertion about a specified subject, use expect.
+
+```js
+expect(el).to.have.attr("href", "/about");
+expect(el).to.have.attr("target", "_blank");
+```
+
+## Chainable getters
+
+-They don't actually do anything, but they enable you to write clear, english sentences.
+
+```json
+to, be, been, is, that, which, and, has, have, with, at, of, same
+```
 
 # Functions
 
-## Cypress important functions [Link](https://docs.cypress.io/api/table-of-contents)
+## Selecting elements
 
-1. _visit_ - Visit a remote URL
+### get()
 
-```js
-cy.visit("BASE URL");
-```
-
-1. _get_ - Get one or more DOM elements by selector or alias
+Get one or more DOM elements by selector or alias
 
 ```js
 cy.get(selector);
 cy.get(alias);
 cy.get(selector, options);
 cy.get(alias, options);
+
+//  escaping specials characters
+<div id="user:1234" class="admin.user">
+  Test
+</div>;
+cy.get("#user\\:1234").should("have.text", "Joe");
+cy.get(".admin\\.user");
+
+//  Element starting with TEXT ^=
+cy.get("[id^=local-example]").should("have.text", "first");
+
+// Element ending with TEXT $=
+cy.get("[id$=example-AF9]").should("have.text", "second");
+
+// Element containing TExY within properties *=
+cy.get('a[href*="help"]');
+
+// Get by invoking methods via invoke()
+cy.get('[data-test-id="test-example"]')
+  .invoke("attr", "data-test-id")
+  .should("equal", "test-example");
+
+cy.get('[data-test-id="test-example"]')
+  .invoke("css", "position")
+  .should("equal", "static");
+
+// Chain assertions
+cy.get('[data-test-id="test-example"]')
+  .should("have.attr", "data-test-id", "test-example")
+  .and("have.css", "position", "static");
+
+// Multiple element get by chaining with comma
+cy.get("#and-selector-example p, #and-selector-example li");
 ```
 
-1. _contains_ - Get the DOM element containing the text. DOM elemets can contain more than the desired text and still match.
+### contains()
+
+Get the DOM element containing the text. DOM elemets can contain more than the desired text and still match.
 
 ```js
 .contains(content)
@@ -208,389 +298,27 @@ cy.contains(selector, content)
 cy.contains(selector, content, options)
 
 { matchCase: false }
-regex
+
+// ignore case
+cy.contains(/cypress user/i)
+// match text exactly
+cy.contains(/^Cypress User$/)
 
 
+// The text can be anywhere in the element or its children.
 ```
 
-1. _click_ - Click a DOM element
+### within()
+
+Scopes all subsequent cy commands to within this element. Useful when working within a particular group of elements such as a <form>.
 
 ```js
-.click()
-.click(options)
-.click(position)
-.click(position, options)
-.click(x, y)
-.click(x, y, options)
-```
+.within(callbackFn)
+.within(options, callbackFn)
 
-```js
-// Options:
-cy.click({force: true}) - if element is not visible on the page or has set 0x0 w/h force click on it to proceed with test
-```
-
-1. _type_ - Type into a DOM element
-
-```js
-.type(text)
-.type(text, options)
-```
-
-1. _eq_ - Get a DOM element at a specific index in an array of elements
-
-```js
-.eq(index)
-.eq(indexFromEnd)
-.eq(index, options)
-.eq(indexFromEnd, options)
-
-```
-
-1. _find_ - Get the descendent DOM elements of a specific selector
-
-```js
-.find(selector)
-.find(selector, options)
-
-```
-
-1. _document_ - Get the window.document of the page that is currently active
-
-```js
-cy.document();
-cy.document(options);
-```
-
-1. _title_ - Get the document title property of the page that is currently active
-
-```js
-cy.title();
-cy.title(options);
-```
-
-1. _url_ - Get the current URL of the page that is currently active
-
-```js
-cy.url(); // Gets current URL as a string
-cy.url(options);
-```
-
-1. _log_ - Print a message to the Cypress Command Log
-
-```js
-cy.log(message); // Gets current URL as a string
-cy.log(message, args, ...);
-```
-
-1. _then_ - Enables you to work with the subject yieded from the previous command. Controls what is the order of executing and displaying
-
-```js
-.then(callbackFn); // Gets current URL as a string
-.then(options, callbackFn);
-```
-
-1. _each_ - Iterate through an array like structure(arrays or objects with a length property)
-
-```js
-.each(callbackFn);
-
-cy.get("SELECTOR").each(($el, index, $list) => {
-
-})
-```
-
-1. _wrap_ - Yield the object passed into .wrap() . If the object is a promise, yield its resolved value
-
-```js
-cy.wrap(subject);
-cy.wrap(subject, options);
-```
-
-1. _invoke_ - Invoking JQuery and JS methods and funnctions
-
-```js
-cy.get(".modal").invoke("show");
-```
-
-1. _check_ - Check checkbox(es) or radios. This element must be an input width type checkbox or radio
-
-```js
-.check()
-.check(value)
-.check(values)
-.check(options)
-.check(value, options)
-.check(values, options)
-```
-
-```js
-.check('US')
-.check(['US','EN'])
-```
-
-1. _uncheck_ - Check checkbox(es) or radios. This element must be an input width type checkbox or radio
-
-```js
-.uncheck()
-.uncheck(value)
-.uncheck(values)
-.uncheck(options)
-.uncheck(value, options)
-.uncheck(values, options)
-```
-
-```js
-.uncheck('US')
-.uncheck(['US','EN'])
-```
-
-1. _select_ - Select an option within a select. We can select via value or via option text
-
-```js
-.select()
-.select(value)
-.select(values)
-.select(options)
-.select(value, options)
-.select(values, options)
-```
-
-```js
-.select('US')
-.select(['US','EN'])
-```
-
-1. _trigger_ - Trigger and event on a DOM element
-
-```js
-.trigger(eventName)
-.trigger(eventName, position)
-.trigger(eventName, options)
-.trigger(eventName, x, y)
-.trigger(eventName, position, options)
-.trigger(eventName, x, y, options)
-```
-
-1. _fixtures_ - Load a fixed set of data located in a file
-
-```js
-cy.fixture(filePath);
-cy.fixture(filePath, encoding);
-cy.fixture(filePath, options);
-cy.fixture(filePath, encoding, options);
-
-// fixture initialization
-cy.fixture("example.json").then(function (data) {
-  // this.data = data
-  globalThis.data = data;
-});
-
-//  data is accessed by typing:
-data.NAME_FROM_JSON_FILE;
-```
-
-1. _pause_ - Stop cy commands from running and allow interaction with the application under test. You can then "resume" running all commands or choose to step through the "next" commands from the Command Log.
-
-```js
-.pause()
-.pause(options)
-
-cy.pause()
-cy.pause(options)
-
-```
-
-```js
-// usage:
-cy.pause().getCookie("app"); // Pause at the beginning of commands
-cy.get("nav").pause(); // Pause after the 'get' commands yield
-```
-
-1. _wait_ - Wait for a number of milliseconds or wait for an aliased resource to resolve before moving on to the next command.
-
-```js
-cy.wait(time);
-cy.wait(alias);
-cy.wait(aliases);
-cy.wait(time, options);
-cy.wait(alias, options);
-cy.wait(aliases, options);
-```
-
-```js
 // usage
-cy.wait(500);
-cy.wait("@getProfile");
-```
+cy.get('.list').within(($list) => {}) // Yield the `.list` and scope all commands within it
 
-1. _intercept_ -Spy and stub network requests and responses.
-
-```js
-cy.intercept(url);
-cy.intercept(method, url);
-cy.intercept(routeMatcher);
-
-// spying and response stubbing
-cy.intercept(url, staticResponse);
-cy.intercept(method, url, staticResponse);
-cy.intercept(routeMatcher, staticResponse);
-cy.intercept(url, routeMatcher, staticResponse);
-
-// spying, dynamic stubbing, request modification, etc.
-cy.intercept(url, routeHandler);
-cy.intercept(method, url, routeHandler);
-cy.intercept(routeMatcher, routeHandler);
-cy.intercept(url, routeMatcher, routeHandler);
-```
-
----
-
-## Aliases
-
-- Sharing context is the simplest way to use Aliases. To alias something you would like to share we use _as()_ command.
-- Aliases are available as \*this.\*\*
-- When we call aliases we use @ sign
-
-## Selectors
-
-- Select by name : [name = "name"]
-- Select by type : [type = "type"]
-- XPATH selectors
-
-  - nodename - All nodes with the name "nodename"
-  - / - Selects from the root node
-  - // - Selects nodes in teh documents from the current node that match the selection no matter where they are
-  - . - Selects the current node
-  - .. - Selects the parent of the current node
-  - @ - Selects attributes
-  - \* wild card
-  - $ - look at the end of whatever we search for
-  - ^ - starts with
-
-  ```js
-  //By tag name
-  cy.get("input");
-
-  //By attribute name and value
-  cy.get("input[name='first_name']");
-
-  //By id
-  cy.get("#contact_me");
-
-  //By class
-  cy.get(".feedback-input");
-
-  //By multiple classes
-  cy.get("[class='navbar navbar-inverse navbar-fixed-top']");
-
-  //By two different attributes
-  cy.get("[name='email'][placeholder='Email Address']");
-
-  //By xpath
-  cy.xpath("//input[@name='first_name']");
-  ```
-
----
-
-## Plugins
-
-1. cypress XPath
-
-```js
-npm install -D cypress-xpath
-// Then include in projects cypress/support/index.js
-require('cypress-xpath)
-```
-
-1. cypress file upload - In order to work properly we need to install dependency
-
-```js
-npm install --save-dev cypress-file-upload
-
-// In support/commands.js insert
-
-import 'cypress-file-upload'
-
-```
-
-1. Cypress RETRIABILITY- Commes preinstalled in Cypress v5
-
-```js
-// npm install -D cypress-plugin-retries DEPRECATED
-// At the top og cypress/support/index.js DEPRECATED
-// require('cypress-plugin-retries') DEPRECATED
-// In cypress.json in env
-// "RETRIES": 2, - DEPRECATED
-// Directly in test
-// Cypress.currentTest.retries(4) - DEPRECATED
-
-
-// in cypress.json
-"retries": {
-      "runMode": 1,
-      "openMode": 2
-    }
-// in test definition : TO override default settings in cypress.json
-
-it("Description", {
-retries:{
-  runMode: 2,
-  openMode: 2
-}
-}, () => {
-
-})
-
-// VIA NPX
-
-CYPRESS_RETRIES=1 npm run NAMEOFSCRIPT
-```
-
-- _runMode_ - Allows zou to deine the number of test retries when running cypress run
-
-- _openMode_ - Allows zou to deine the number of test retries when running cypress open
-
-1. Cucumber preprocessor - Run cucumber/gherkin szntax with Cypress.io
-
-```js
-npm install --save-dev cypress-cucumber-preprocessor
-
-//  in cypress/plugins/index.js
-
-const cucumber = require('cypress-cucumber-preprocessor').default
-
-module.exports = (on, config) => {
-  on('file:preprocessor', cucumber())
-}
-
-// in package.json
- "cypress-cucumber-preprocessor": {
-    "nonGlobalStepDefinitions": true
-  },
-
-```
-
----
-
-## Mouse actions
-
-```js
-//scroll into view
-cy.get("#actions").scrollIntoView();
-
-// drag and drop which1 - deprecated but means that it will click in center of element
-
-cy.get("#draggable").trigger("mousedown", {
-  which: 1,
-});
-
-cy.get("#droppable").trigger("mousemove").trigger("mouseup", {
-  force: true,
-});
-
-// doubleclick
-
-cy.get("#double-click").dblclick();
 ```
 
 ## Traversal in JS and Cypress
@@ -664,6 +392,628 @@ cy.get(".traversal-button-other-states .active")
   .should("have.length", 3);
 ```
 
+## Actions
+
+### type()
+
+- Type into a DOM element
+
+```js
+.type(text)
+.type(text, options)
+```
+
+- We can clear field before typing with _clear()_
+
+### focus(), blur(), clear()
+
+- To focus on a DOM element, use the .focus() command.
+- To blur on a DOM element, use the .blur() command.
+- To clear on a DOM element, use the .clear() command.
+
+### submit()
+
+- To submit a form, use the cy.submit() command.
+
+### click()
+
+- Click a DOM element
+
+```js
+.click()
+.click(options)
+.click(position)
+.click(position, options)
+.click(x, y)
+.click(x, y, options)
+```
+
+```js
+// Options:
+cy.click({force: true}) - if element is not visible on the page or has set 0x0 w/h force click on it to proceed with test
+{ multiple: true } - to click on multiple elements pass this parameter
+```
+
+### dblclick(), rightclick()
+
+- To double click a DOM element, use the .dblclick() command.
+- To right click a DOM element, use the .rightclick() command.
+
+### check()
+
+- Check checkbox(es) or radios. This element must be an input width type checkbox or radio
+
+```js
+.check()
+.check(value)
+.check(values)
+.check(options)
+.check(value, options)
+.check(values, options)
+```
+
+```js
+.check('US')
+.check(['US','EN'])
+```
+
+### uncheck()
+
+- Check checkbox(es) or radios. This element must be an input width type checkbox or radio
+
+```js
+.uncheck()
+.uncheck(value)
+.uncheck(values)
+.uncheck(options)
+.uncheck(value, options)
+.uncheck(values, options)
+```
+
+```js
+.uncheck('US')
+.uncheck(['US','EN'])
+```
+
+### select()
+
+- Select an option within a select. We can select via value or via option text
+
+```js
+.select()
+.select(value)
+.select(values)
+.select(options)
+.select(value, options)
+.select(values, options)
+```
+
+```js
+.select('US')
+.select(['US','EN'])
+```
+
+### scrollIntoView(), scrollTo()
+
+- To scroll an element into view, use the .scrollintoview() command.
+- To scroll the window or a scrollable element to a specific position, use the cy.scrollTo() command.
+
+### trigger
+
+- Trigger and event on a DOM element
+
+```js
+.trigger(eventName)
+.trigger(eventName, position)
+.trigger(eventName, options)
+.trigger(eventName, x, y)
+.trigger(eventName, position, options)
+.trigger(eventName, x, y, options)
+```
+
+### Mouse actions - draggable(), droppable()
+
+```js
+// drag and drop which1 - deprecated but means that it will click in center of element
+
+cy.get("#draggable").trigger("mousedown", {
+  which: 1,
+});
+
+cy.get("#droppable").trigger("mousemove").trigger("mouseup", {
+  force: true,
+});
+```
+
+## Location
+
+### hash()
+
+- To get the current URL hash, use the cy.hash() command.
+
+### location()
+
+- To get window.location, use the cy.location() command.
+
+### url()
+
+- To get the current URL, use the cy.url() command
+
+## Navigation
+
+### go('forward'), go('back'), go(-1), go(1)
+
+- To go back or forward in the browser's history, use the cy.go() command.
+
+### reload()
+
+- To reload the page, use the cy.reload() command.
+
+### visit()
+
+- Visit a remote URL
+
+```js
+cy.visit("BASE URL");
+```
+
+## Window
+
+### window()
+
+- To get the global window object, use the cy.window() command.
+
+### document()
+
+- To get the document object, use the cy.document() command.
+
+### title()
+
+- To get the title, use the cy.title() command.
+
+## Misc
+
+### log()
+
+- Print a message to the Cypress Command Log
+
+```js
+cy.log(message); // Gets current URL as a string
+cy.log(message, args, ...);
+```
+
+### end()
+
+- To end the command chain, use the .end() command.
+- cy.end is useful when you want to end a chain of commands
+
+### exec()
+
+- To execute a system command, use the cy.exec() command.
+
+### focused()
+
+- To get the DOM element that has focus, use the cy.focused() command.
+
+### screenshot()
+
+- To take a screenshot, use the cy.screenshot() command.
+
+### wrap()
+
+- Yield the object passed into .wrap() . If the object is a promise, yield its resolved value
+- Once you have an object wrapped, you can access its properties, invoke its methods, and even pass it via an alias.
+
+```js
+cy.wrap(subject);
+cy.wrap(subject, options);
+```
+
+### pause()
+
+- Stop cy commands from running and allow interaction with the application under test. You can then "resume" running all commands or choose to step through the "next" commands from the Command Log.
+
+```js
+.pause()
+.pause(options)
+
+cy.pause()
+cy.pause(options)
+
+```
+
+```js
+// usage:
+cy.pause().getCookie("app"); // Pause at the beginning of commands
+cy.get("nav").pause(); // Pause after the 'get' commands yield
+```
+
+### wait()
+
+- Wait for a number of milliseconds or wait for an aliased resource to resolve before moving on to the next command.
+
+```js
+cy.wait(time);
+cy.wait(alias);
+cy.wait(aliases);
+cy.wait(time, options);
+cy.wait(alias, options);
+cy.wait(aliases, options);
+```
+
+```js
+// usage
+cy.wait(500);
+cy.wait("@getProfile");
+```
+
+### eq
+
+- Get a DOM element at a specific index in an array of elements
+
+```js
+.eq(index)
+.eq(indexFromEnd)
+.eq(index, options)
+.eq(indexFromEnd, options)
+
+```
+
+### Cookies and Local Storage
+
+```js
+cy.getCookie();
+cy.getCookies();
+cy.setCookie();
+cy.clearCookie();
+cy.clearCookies();
+```
+
+- You can directly access the browser's localStorage object.
+
+```js
+localStorage.getItem("AppSays");
+localStorage.setItem("prop1", "red");
+localStorage.setItem("prop2", "blue");
+localStorage.setItem("prop3", "magenta");
+```
+
+## Connectors
+
+### each()
+
+- Iterate through an array like structure(arrays or objects with a length property)
+
+```js
+.each(callbackFn);
+
+cy.get("SELECTOR").each(($el, index, $list) => {
+
+})
+```
+
+### its()
+
+-To get the properties on the current subject, use the .its() command. For example, if the subject is the list of found elements, we can grab its length property and use it in the assertion:
+
+### then()
+
+- Enables you to work with the subject yieded from the previous command. Controls what is the order of executing and displaying
+
+```js
+.then(callbackFn); // Gets current URL as a string
+.then(options, callbackFn);
+```
+
+### invoke()
+
+- Invoking JQuery and JS methods and funnctions
+
+```js
+cy.get(".modal").invoke("show");
+```
+
+### spread()
+
+- To spread an array as individual arguments to a callback function, use the .spread() command.
+
+```js
+const arr = ["foo", "bar", "baz"];
+
+cy.wrap(arr).spread(function (foo, bar, baz) {
+  expect(foo).to.eq("foo");
+  expect(bar).to.eq("bar");
+  expect(baz).to.eq("baz");
+});
+```
+
+## Files
+
+### fixtures()
+
+- Load a fixed set of data located in a file
+
+```js
+cy.fixture(filePath);
+cy.fixture(filePath, encoding);
+cy.fixture(filePath, options);
+cy.fixture(filePath, encoding, options);
+
+// fixture initialization
+cy.fixture("example.json").then(function (data) {
+  // this.data = data
+  globalThis.data = data;
+});
+
+//  data is accessed by typing:
+data.NAME_FROM_JSON_FILE;
+```
+
+### readFile(), writeFile()
+
+- To read a file's content, use the cy.readFile() command.
+- To write to a file with the specified contents, use the cy.writeFile() command.
+
+## Network Requests
+
+### request()
+
+```js
+cy.request(url);
+cy.request(url, body);
+cy.request(method, url);
+cy.request(method, url, body);
+cy.request(options);
+
+// Usage
+
+cy.request("POST", "https://jsonplaceholder.cypress.io/posts", {
+  userId: user.id,
+  title: "Cypress Test Runner",
+  body: "Fast, easy and reliable testing for anything that runs in a browser.",
+});
+
+cy.request({
+  method: "DELETE / PUT / POST / GET",
+  url: "localhost:3000/posts/12",
+  body: {
+    // "title": "Do you want to learn automation testing",
+    title: "Updated title - Test",
+    author: "Nikolina Nina Ina Test Update PUT method",
+  },
+  headers: {
+    accept: "application/json", // ONLY FOR GET REQUEST
+  },
+}).then((response) => {
+  expect(response.status).to.equal(200);
+});
+```
+
+### intercept()
+
+Spy and stub network requests and responses.
+
+```js
+cy.intercept(url);
+cy.intercept(method, url);
+cy.intercept(routeMatcher);
+
+// spying and response stubbing
+cy.intercept(url, staticResponse);
+cy.intercept(method, url, staticResponse);
+cy.intercept(routeMatcher, staticResponse);
+cy.intercept(url, routeMatcher, staticResponse);
+
+// spying, dynamic stubbing, request modification, etc.
+cy.intercept(url, routeHandler);
+cy.intercept(method, url, routeHandler);
+cy.intercept(routeMatcher, routeHandler);
+cy.intercept(url, routeMatcher, routeHandler);
+
+// Usage
+// https://on.cypress.io/intercept
+
+let message = "whoa, this comment does not exist";
+
+// Listen to POST to comments
+cy.intercept("POST", "**/comments").as("postComment");
+
+// we have code that posts a comment when
+// the button is clicked in scripts.js
+cy.get(".network-post").click();
+cy.wait("@postComment").should(({ request, response }) => {
+  expect(request.body).to.include("email");
+  expect(request.headers).to.have.property("content-type");
+  expect(response && response.body).to.have.property(
+    "name",
+    "Using POST in cy.intercept()"
+  );
+});
+
+// Stub a response to PUT comments/ ****
+cy.intercept(
+  {
+    method: "PUT",
+    url: "**/comments/*",
+  },
+  {
+    statusCode: 404,
+    body: { error: message },
+    headers: { "access-control-allow-origin": "*" },
+    delayMs: 500,
+  }
+).as("putComment");
+
+// we have code that puts a comment when
+// the button is clicked in scripts.js
+cy.get(".network-put").click();
+
+cy.wait("@putComment");
+
+// our 404 statusCode logic in scripts.js executed
+cy.get(".network-put-comment").should("contain", message);
+
+// we can spy on requests that do not have a response body
+cy.intercept("DELETE", "/comments/1").as("delete");
+cy.get(".network-delete").click();
+cy.wait("@delete");
+cy.contains(".network-delete-comment", "Comment deleted!");
+```
+
+### XHR Testing
+
+XHR is an API in teh form of an object whose methods transfer data brtween a web browser an a web server. Cypress provides direct access to XHR objets, enabling us to create assertions based upon the properties of the XHR objects. We can alsu stub and mock the response of an XHR object
+
+1. Disable XHR displaying / support/index.js - from version 5.0.
+
+```js
+Cypress.Server.defaults({
+  ignore: (xhr) => true,
+});
+
+// OLD CODE for v4.12.1. DEPRECATED
+Cypress.Server.defaults({
+  whitelist: (xhr) => {
+    return true;
+  },
+});
+```
+
+---
+
+# Aliasing
+
+- Sharing context is the simplest way to use Aliases. To alias something you would like to share we use _as()_ command.
+- Aliases are available as \*this.\*\*
+- When we call aliases we use @ sign
+
+```js
+// Example
+cy.get(".as-table")
+  .find("tbody>tr")
+  .first()
+  .find("td")
+  .first()
+  .find("button")
+  .as("firstBtn");
+
+// when we reference the alias, we place an
+// @ in front of its name
+cy.get("@firstBtn").click();
+
+cy.get("@firstBtn")
+  .should("have.class", "btn-success")
+  .and("contain", "Changed");
+```
+
+# Selectors
+
+- Select by name : [name = "name"]
+- Select by type : [type = "type"]
+- XPATH selectors
+
+  - nodename - All nodes with the name "nodename"
+  - / - Selects from the root node
+  - // - Selects nodes in teh documents from the current node that match the selection no matter where they are
+  - . - Selects the current node
+  - .. - Selects the parent of the current node
+  - @ - Selects attributes
+  - \* wild card
+  - $ - look at the end of whatever we search for
+  - ^ - starts with
+
+  ```js
+  //By tag name
+  cy.get("input");
+
+  //By attribute name and value
+  cy.get("input[name='first_name']");
+
+  //By id
+  cy.get("#contact_me");
+
+  //By class
+  cy.get(".feedback-input");
+
+  //By multiple classes
+  cy.get("[class='navbar navbar-inverse navbar-fixed-top']");
+
+  //By two different attributes
+  cy.get("[name='email'][placeholder='Email Address']");
+
+  //By xpath
+  cy.xpath("//input[@name='first_name']");
+  ```
+
+---
+
+# Plugins
+
+## cypress XPath
+
+```js
+npm install -D cypress-xpath
+// Then include in projects cypress/support/index.js
+require('cypress-xpath)
+```
+
+## Cypress RETRIABILITY- Commes preinstalled in Cypress v5
+
+```js
+// npm install -D cypress-plugin-retries DEPRECATED
+// At the top og cypress/support/index.js DEPRECATED
+// require('cypress-plugin-retries') DEPRECATED
+// In cypress.json in env
+// "RETRIES": 2, - DEPRECATED
+// Directly in test
+// Cypress.currentTest.retries(4) - DEPRECATED
+
+
+// in cypress.json
+"retries": {
+      "runMode": 1,
+      "openMode": 2
+    }
+// in test definition : TO override default settings in cypress.json
+
+it("Description", {
+retries:{
+  runMode: 2,
+  openMode: 2
+}
+}, () => {
+
+})
+
+// VIA NPX
+
+CYPRESS_RETRIES=1 npm run NAMEOFSCRIPT
+```
+
+- _runMode_ - Allows zou to deine the number of test retries when running cypress run
+
+- _openMode_ - Allows zou to deine the number of test retries when running cypress open
+
+## Cucumber preprocessor - Run cucumber/gherkin szntax with Cypress.io
+
+```js
+npm install --save-dev cypress-cucumber-preprocessor
+
+//  in cypress/plugins/index.js
+
+const cucumber = require('cypress-cucumber-preprocessor').default
+
+module.exports = (on, config) => {
+  on('file:preprocessor', cucumber())
+}
+
+// in package.json
+ "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true
+  },
+
+```
+
 ---
 
 # Tips and Tricks
@@ -688,19 +1038,6 @@ cy.get("#contact-us").invoke("removeAttr", "target").click({
   "chromeWebSecurity": false
 }
 //
-```
-
-## Browser controls - Back, Forward, Reload
-
-```js
-//back
-cy.go("back");
-// forward
-cy.go("forward");
-// reload
-cy.reload();
-// hard reload
-cy.reload(true);
 ```
 
 ---
@@ -793,7 +1130,7 @@ Alter env in runtime
 cy.visit("/"); //goes to Base URL
 ```
 
-## Custom Commands
+## Custom - Cypress.Commands.add()
 
 You define custom command in support/commands.js and call it as a function
 
@@ -822,16 +1159,6 @@ cy.fixture("user.jpg", "base64").then((fileContent) => {
 });
 ```
 
-## Screenshots and Videos
-
-```js
-// Cypress comes with the ability to take screenshots, whether you are running via cypress open or cypress run, even in CI.
-cy.screenshot();
-
-// Videos
-// Cypress records a video for each spec file when running tests during cypress run. Videos are not automatically recorded during cypress open
-```
-
 ## Configuring Viewports
 
 Control the size and orientation of the screen for your application. You can set the viewport's width and height globally by defining viewportWidth and viewportHeight in the configuration. [Presets link](https://docs.cypress.io/api/commands/viewport#Arguments)
@@ -845,30 +1172,6 @@ cy.viewport(preset, orientation, options);
 // USAGE:
 cy.viewport(550, 750); // Set viewport to 550px x 750px
 cy.viewport("iphone-6"); // Set viewport to 375px x 667px
-```
-
-## Clear Cookies and Clear Local Storage
-
-Clear all browser cookies for current domain and subdomain. Cypress automatically clears all cookies before each test to prevent state from being shared across tests. You shouldn't need to use this command unless you're using it to clear a specific cookie inside a single test.
-
-```js
-cy.clearCookies();
-cy.clearCookies(options);
-
-cy.clearCookies(); // clear all cookies
-```
-
-Clear data in localStorage for current domain and subdomain. Cypress automatically runs this command before each test to prevent state from being shared across tests. You shouldn't need to use this command unless you're using it to clear localStorage inside a single test.
-
-```js
-cy.clearLocalStorage();
-cy.clearLocalStorage(key);
-cy.clearLocalStorage(options);
-cy.clearLocalStorage(keys, options);
-
-// USAGE:
-
-cy.clearLocalStorage(); // clear all local storage
 ```
 
 # Scripts and configurations
@@ -968,51 +1271,12 @@ By making script we shorten the time we spend to type whole commands and whole p
 
 ```
 
-# JSON / API / XHR
+# Best Practices
 
-## JSON Server Configurations
+## Selecting element
 
-- Clone JSON Server
-- run _npm install_
-- run _npm install -g json-server_
-- run _npm run start_
+- Prefer dedicated data-cy or data-test attributes to CSS class names and element IDs.
 
-## API Testing
+## _cy.get_ vs _cy.find_
 
-1. _cy.request()_
-
-```js
-cy.request({
-  method: "DELETE / PUT / POST / GET",
-  url: "localhost:3000/posts/12",
-  body: {
-    // "title": "Do you want to learn automation testing",
-    title: "Updated title - Test",
-    author: "Nikolina Nina Ina Test Update PUT method",
-  },
-  headers: {
-    accept: "application/json", // ONLY FOR GET REQUEST
-  },
-}).then((response) => {
-  expect(response.status).to.equal(200);
-});
-```
-
-## XHR Testing
-
-XHR is an API in teh form of an object whose methods transfer data brtween a web browser an a web server. Cypress provides direct access to XHR objets, enabling us to create assertions based upon the properties of the XHR objects. We can alsu stub and mock the response of an XHR object
-
-1. Disable XHR displaying / support/index.js - from version 5.0.
-
-```js
-Cypress.Server.defaults({
-  ignore: (xhr) => true,
-});
-
-// OLD CODE for v4.12.1. DEPRECATED
-Cypress.Server.defaults({
-  whitelist: (xhr) => {
-    return true;
-  },
-});
-```
+- The _cy.get_ command always starts its search from the document element, or, if used inside .within, from the cy.root element. The _.find_ command starts the search from the current subject.
